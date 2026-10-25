@@ -20,19 +20,14 @@
 
   body {
     background-color: var(--bg-color); color: var(--text-color); min-height: 100vh; overflow-x: hidden;
-    background-image: radial-gradient(circle at 10% 10%, rgba(0, 240, 255, 0.15) 0%, transparent 40%),
-                      radial-gradient(circle at 90% 90%, rgba(255, 0, 228, 0.1) 0%, transparent 40%);
+    background-image: 
+      linear-gradient(rgba(0, 240, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 240, 255, 0.04) 1px, transparent 1px),
+      radial-gradient(circle at 10% 10%, rgba(0, 240, 255, 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 90% 90%, rgba(255, 0, 228, 0.1) 0%, transparent 40%);
+    background-size: 40px 40px, 40px 40px, 100% 100%, 100% 100%;
     background-attachment: fixed;
   }
-
-  .bg-particles {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1;
-    background-image: 
-      radial-gradient(circle at 20% 30%, rgba(0, 240, 255, 0.1) 0%, transparent 20%),
-      radial-gradient(circle at 80% 70%, rgba(255, 0, 228, 0.08) 0%, transparent 20%);
-    animation: pulseBg 10s infinite alternate ease-in-out;
-  }
-  @keyframes pulseBg { 0% { opacity: 0.6; } 100% { opacity: 1; } }
 
   /* ================= هدر ================= */
   header {
@@ -133,14 +128,13 @@
   
   .copy-container { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 20px; direction: ltr; }
   
-  /* 🪨 آیدی حکاکی شده با درخشش نئونی آبی و فرو رفتگی 🪨 */
+  /* 🪨 آیدی حکاکی شده با درخشش نئونی آبی */
   .id-text { 
     font-size: 1.8rem; 
     font-weight: 900; 
     direction: ltr;
     letter-spacing: 2px;
     color: var(--primary-blue);
-    /* افکت فرو رفتگی: سایه داخلی تیره و سایه بیرونی نئونی */
     text-shadow: 
       0 0 5px rgba(0, 240, 255, 0.3),
       0 0 15px rgba(0, 240, 255, 0.4),
@@ -176,7 +170,18 @@
   .shop-card { background: var(--card-bg); border: 1px solid rgba(0, 240, 255, 0.2); border-radius: 20px; padding: 30px 20px; width: 100%; max-width: 500px; backdrop-filter: blur(15px); text-align: center; margin-bottom: 25px; position: relative; transition: all 0.3s ease; }
   .shop-card:hover { border-color: var(--primary-blue); box-shadow: 0 0 30px rgba(0, 240, 255, 0.15); }
   
+  /* بیضی موجودی (آبی) */
   .stock-badge { position: absolute; top: 15px; left: 15px; background: rgba(0, 240, 255, 0.15); border: 1px solid var(--primary-blue); color: var(--primary-blue); font-size: 0.75rem; font-weight: 700; padding: 5px 12px; border-radius: 30px; display: flex; align-items: center; gap: 5px; }
+
+  /* 🟣 بیضی تعداد محدود (جدید - بنفش/صورتی) 🟣 */
+  .limited-badge { 
+    position: absolute; top: 15px; left: 135px; 
+    background: rgba(180, 0, 255, 0.15); border: 1px solid #b400ff; 
+    color: #d580ff; font-size: 0.75rem; font-weight: 700; 
+    padding: 5px 12px; border-radius: 30px; 
+    display: flex; align-items: center; gap: 5px;
+    box-shadow: 0 0 10px rgba(180, 0, 255, 0.2);
+  }
 
   .discount-timer {
     position: absolute; top: 15px; right: 15px;
@@ -197,7 +202,6 @@
   .feature-list li { list-style: none; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; color: var(--text-color); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
   .feature-list li::before { content: '✓'; color: var(--primary-blue); font-weight: 900; font-size: 1.1rem; }
   
-  /* 🟡 برجسته کردن اعداد در لیست ویژگی‌ها */
   .highlight-number {
     color: #ffd700;
     font-size: 1.2rem;
@@ -221,7 +225,19 @@
   .support-card p { font-size: 0.95rem; color: var(--text-color); line-height: 1.8; margin-bottom: 25px; background: rgba(255,255,255,0.03); padding: 15px; border-radius: 12px; }
 
   /* ================= فوتر ================= */
-  footer { text-align: center; padding: 30px; border-top: 1px solid rgba(0, 240, 255, 0.1); color: var(--text-muted); font-size: 0.85rem; margin-top: 40px; }
+  footer { 
+    text-align: center; padding: 30px; border-top: 1px solid rgba(0, 240, 255, 0.1); 
+    color: var(--text-muted); font-size: 0.85rem; margin-top: 40px; 
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  
+  .titanium-credit {
+    color: var(--primary-blue);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+    display: flex; align-items: center; justify-content: center; gap: 5px;
+  }
 
   @media (max-width: 768px) { 
     .hero h1 { font-size: 2rem; } 
@@ -229,12 +245,11 @@
     .sidebar { width: 85%; right: -100%; }
     .shop-card, .support-card { padding: 20px 15px; }
     .id-text { font-size: 1.4rem; }
+    .limited-badge { left: 125px; font-size: 0.65rem; padding: 4px 8px; }
   }
 </style>
 </head>
 <body>
-
-  <div class="bg-particles"></div>
 
   <!-- هدر -->
   <header>
@@ -296,6 +311,7 @@
     <!-- بسته سوم: کانال آماده -->
     <div class="shop-card">
       <div class="stock-badge">✨ ۴ تا موجود است</div>
+      <div class="limited-badge">⚡ تعداد محدود</div>
       
       <div class="discount-timer">
         <span class="discount-label">۳۰٪ تخفیف ویژه</span>
@@ -358,7 +374,6 @@
       <div class="feature-card"><span class="feature-icon">🎧</span><h3>پشتیبانی ۲۴/۷</h3><p>تیم پشتیبانی ما در تمام ساعات شبانه‌روز آماده پاسخگویی به سوالات و مشکلات شماست.</p></div>
       <div class="feature-card"><span class="feature-icon">💎</span><h3>کیفیت و قیمت</h3><p>سفارش‌های متنوع با کیفیت بالا و قیمتی کاملاً زیر بازار. بهترین انتخاب برای رشد شما.</p></div>
       
-      <!-- ویژگی جدید: پلتفرم‌های پشتیبانی شده -->
       <div class="feature-card" style="grid-column: 1 / -1;">
         <span class="feature-icon">🌐</span>
         <h3>پلتفرم‌های پشتیبانی شده</h3>
@@ -381,8 +396,13 @@
     </div>
   </section>
 
-  <!-- فوتر -->
-  <footer>© ۲۰۲۵ نئون شاپ | تمامی حقوق محفوظ است.</footer>
+  <!-- فوتر با اعتبار تیتانیم -->
+  <footer>
+    <div>© ۲۰۲۵ نئون شاپ | تمامی حقوق محفوظ است.</div>
+    <div class="titanium-credit">
+      ⚡ این سایت توسط تیم برنامه‌نویسی تیتانیم توسعه یافته و قدرت گرفته است
+    </div>
+  </footer>
 
   <!-- اسکریپت -->
   <script>
@@ -391,7 +411,7 @@
     function openSidebar() { document.getElementById('sidebar').classList.add('active'); document.getElementById('sidebarOverlay').classList.add('active'); }
     function closeSidebar() { document.getElementById('sidebar').classList.remove('active'); document.getElementById('sidebarOverlay').classList.remove('active'); }
 
-    // زمان پیام به 9 ثانیه کاهش یافت
+    // زمان پیام 9 ثانیه
     function showComingSoon(title) {
       const toast = document.getElementById('toast');
       toast.textContent = `⏳ بخش «${title}» به زودی اضافه خواهد شد!`;
@@ -450,42 +470,28 @@
       }
     }, 1000);
 
-    // ================= 🔢 تعداد کاربران متحرک (56% افزایش / 44% کاهش) =================
+    // ================= 🔢 تعداد کاربران متحرک =================
     let currentUsers = 6;
     const userCountEl = document.getElementById('user-count');
     
     function updateUserCount() {
-      // 56 درصد شانس افزایش، 44 درصد شانس کاهش
       const isIncrease = Math.random() < 0.56; 
-      const change = Math.floor(Math.random() * 2) + 1; // تغییر بین 1 تا 2 عدد
+      const change = Math.floor(Math.random() * 2) + 1; 
       
-      if (isIncrease) {
-        currentUsers += change;
-      } else {
-        currentUsers -= change;
-      }
+      if (isIncrease) { currentUsers += change; } else { currentUsers -= change; }
       
-      // جلوگیری از منفی شدن
       if (currentUsers < 1) currentUsers = 1;
-      // سقف برای جلوگیری از پرش‌های عجیب
       if (currentUsers > 30) currentUsers = 30; 
 
       userCountEl.innerText = currentUsers.toLocaleString('fa-IR');
     }
 
-    // زمان‌بندی تصادفی برای تغییر عدد (بین 5 تا 12 ثانیه)
     function scheduleNextUserUpdate() {
-      const randomTime = Math.floor(Math.random() * 7000) + 5000; // بین 5000 تا 12000 میلی‌ثانیه
-      setTimeout(() => {
-        updateUserCount();
-        scheduleNextUserUpdate();
-      }, randomTime);
+      const randomTime = Math.floor(Math.random() * 7000) + 5000; 
+      setTimeout(() => { updateUserCount(); scheduleNextUserUpdate(); }, randomTime);
     }
 
-    // شروع چرخه تغییرات
-    scheduleNextUserCount = scheduleNextUserUpdate();
-
+    scheduleNextUserUpdate();
   </script>
-
 </body>
-                                        </html>
+ </html>
