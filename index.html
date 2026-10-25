@@ -133,22 +133,20 @@
   
   .copy-container { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 20px; direction: ltr; }
   
-  /* 🪨 آیدی حکاکی شده با درخشش نئونی 🪨 */
+  /* 🪨 آیدی حکاکی شده با درخشش نئونی آبی و فرو رفتگی 🪨 */
   .id-text { 
     font-size: 1.8rem; 
     font-weight: 900; 
     direction: ltr;
     letter-spacing: 2px;
-    color: transparent;
-    /* افکت حکاکی: متن تیره، سایه داخلی نئونی و سایه بیرونی */
-    background: linear-gradient(180deg, rgba(0, 240, 255, 0.8) 0%, rgba(0, 100, 150, 0.8) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
+    color: var(--primary-blue);
+    /* افکت فرو رفتگی: سایه داخلی تیره و سایه بیرونی نئونی */
     text-shadow: 
-      2px 2px 0px rgba(0, 0, 0, 0.8), 
-      -1px -1px 0px rgba(255, 255, 255, 0.1),
-      0 0 20px rgba(0, 240, 255, 0.4);
-    filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.3));
+      0 0 5px rgba(0, 240, 255, 0.3),
+      0 0 15px rgba(0, 240, 255, 0.4),
+      inset 0 0 10px rgba(0, 0, 0, 0.8),
+      2px 2px 3px rgba(0, 0, 0, 0.9);
+    -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.2);
   }
 
   .copy-btn { background: rgba(0, 240, 255, 0.1); border: 1px solid var(--primary-blue); color: var(--primary-blue); padding: 8px 15px; border-radius: 10px; cursor: pointer; font-size: 0.85rem; font-weight: 700; transition: all 0.3s ease; display: flex; align-items: center; gap: 5px; }
@@ -196,8 +194,18 @@
   .price-box span { color: #ffd700; font-size: 1.6rem; }
 
   .feature-list { text-align: right; margin-bottom: 25px; }
-  .feature-list li { list-style: none; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; color: var(--text-color); display: flex; align-items: center; gap: 10px; }
+  .feature-list li { list-style: none; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; color: var(--text-color); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
   .feature-list li::before { content: '✓'; color: var(--primary-blue); font-weight: 900; font-size: 1.1rem; }
+  
+  /* 🟡 برجسته کردن اعداد در لیست ویژگی‌ها */
+  .highlight-number {
+    color: #ffd700;
+    font-size: 1.2rem;
+    font-weight: 900;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+    margin: 0 5px;
+    display: inline-block;
+  }
 
   .buy-btn { width: 100%; padding: 15px; border-radius: 12px; border: none; background: linear-gradient(90deg, var(--primary-blue), #0088cc); color: #000; font-size: 1rem; font-weight: 900; cursor: pointer; transition: all 0.3s ease; }
   .buy-btn:hover { transform: scale(1.02); box-shadow: 0 0 30px rgba(0, 240, 255, 0.5); }
@@ -261,28 +269,31 @@
       <p>پکیج‌های ویژه و مدرن برای رشد شما</p>
     </div>
 
+    <!-- بسته اول: تبلیغات پیوی -->
     <div class="shop-card">
       <div class="icon-circle">📢</div>
       <h3>تبلیغات (پیوی)</h3>
       <div class="price-box"><span>۱۰۰,۰۰۰</span> تومان</div>
       <ul class="feature-list">
-        <li>ارسال پیام تبلیغاتی شما به پیوی ۸۳۴,۷۹۸ نفر در روبیکا</li>
+        <li>ارسال پیام تبلیغاتی شما به پیوی <span class="highlight-number">۸۳۴,۷۹۸</span> نفر در روبیکا</li>
         <li>تحویل فوری و پشتیبانی سریع</li>
       </ul>
       <a href="https://rubika.ir/Raavo_87" class="buy-btn" style="display: block; text-decoration: none;">💬 خرید پکیج پیوی</a>
     </div>
 
+    <!-- بسته دوم: تبلیغات گروه -->
     <div class="shop-card">
       <div class="icon-circle">👥</div>
       <h3>تبلیغات (گروه)</h3>
       <div class="price-box"><span>۵۰۰,۰۰۰</span> تومان</div>
       <ul class="feature-list">
-        <li>ارسال پیام تبلیغاتی شما در ۱۵۴,۸۲۱ گروه روبیکا</li>
+        <li>ارسال پیام تبلیغاتی شما در <span class="highlight-number">۱۵۴,۸۲۱</span> گروه روبیکا</li>
         <li>تحویل فوری و پشتیبانی سریع</li>
       </ul>
       <a href="https://rubika.ir/Raavo_87" class="buy-btn" style="display: block; text-decoration: none;">💬 خرید پکیج گروه</a>
     </div>
 
+    <!-- بسته سوم: کانال آماده -->
     <div class="shop-card">
       <div class="stock-badge">✨ ۴ تا موجود است</div>
       
@@ -346,6 +357,13 @@
       <div class="feature-card"><span class="feature-icon">🛡️</span><h3>خریدهای تضمینی</h3><p>تمامی خدمات ما دارای گارانتی و ضمانت هستند. در صورت بروز هرگونه مشکل، جایگزینی انجام می‌شود.</p></div>
       <div class="feature-card"><span class="feature-icon">🎧</span><h3>پشتیبانی ۲۴/۷</h3><p>تیم پشتیبانی ما در تمام ساعات شبانه‌روز آماده پاسخگویی به سوالات و مشکلات شماست.</p></div>
       <div class="feature-card"><span class="feature-icon">💎</span><h3>کیفیت و قیمت</h3><p>سفارش‌های متنوع با کیفیت بالا و قیمتی کاملاً زیر بازار. بهترین انتخاب برای رشد شما.</p></div>
+      
+      <!-- ویژگی جدید: پلتفرم‌های پشتیبانی شده -->
+      <div class="feature-card" style="grid-column: 1 / -1;">
+        <span class="feature-icon">🌐</span>
+        <h3>پلتفرم‌های پشتیبانی شده</h3>
+        <p>خدمات دیجیتال ما برای اینستاگرام ، تلگرام ، یوتوب ، روبیکا ، بله ، ایتا ، سروش پلاس ارائه میشه</p>
+      </div>
     </div>
   </section>
 
@@ -373,13 +391,14 @@
     function openSidebar() { document.getElementById('sidebar').classList.add('active'); document.getElementById('sidebarOverlay').classList.add('active'); }
     function closeSidebar() { document.getElementById('sidebar').classList.remove('active'); document.getElementById('sidebarOverlay').classList.remove('active'); }
 
+    // زمان پیام به 9 ثانیه کاهش یافت
     function showComingSoon(title) {
       const toast = document.getElementById('toast');
       toast.textContent = `⏳ بخش «${title}» به زودی اضافه خواهد شد!`;
       toast.classList.add('show');
       closeSidebar();
       clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => { toast.classList.remove('show'); }, 11000); 
+      toastTimer = setTimeout(() => { toast.classList.remove('show'); }, 9000); 
     }
 
     function openShop() { closeSidebar(); document.getElementById('shopModal').classList.add('active'); }
@@ -431,27 +450,42 @@
       }
     }, 1000);
 
-    // ================= 🔢 تعداد کاربران متحرک =================
+    // ================= 🔢 تعداد کاربران متحرک (56% افزایش / 44% کاهش) =================
     let currentUsers = 6;
     const userCountEl = document.getElementById('user-count');
     
     function updateUserCount() {
-      const change = Math.floor(Math.random() * 3) - 1; 
+      // 56 درصد شانس افزایش، 44 درصد شانس کاهش
+      const isIncrease = Math.random() < 0.56; 
+      const change = Math.floor(Math.random() * 2) + 1; // تغییر بین 1 تا 2 عدد
       
-      if (currentUsers + change >= 0 && currentUsers + change <= 20) {
+      if (isIncrease) {
         currentUsers += change;
-      } else if (currentUsers + change < 0) {
-        currentUsers += 1;
-      } else if (currentUsers + change > 20) {
-        currentUsers -= 1;
+      } else {
+        currentUsers -= change;
       }
       
+      // جلوگیری از منفی شدن
+      if (currentUsers < 1) currentUsers = 1;
+      // سقف برای جلوگیری از پرش‌های عجیب
+      if (currentUsers > 30) currentUsers = 30; 
+
       userCountEl.innerText = currentUsers.toLocaleString('fa-IR');
     }
 
-    setInterval(updateUserCount, Math.floor(Math.random() * 4000) + 3000);
+    // زمان‌بندی تصادفی برای تغییر عدد (بین 5 تا 12 ثانیه)
+    function scheduleNextUserUpdate() {
+      const randomTime = Math.floor(Math.random() * 7000) + 5000; // بین 5000 تا 12000 میلی‌ثانیه
+      setTimeout(() => {
+        updateUserCount();
+        scheduleNextUserUpdate();
+      }, randomTime);
+    }
+
+    // شروع چرخه تغییرات
+    scheduleNextUserCount = scheduleNextUserUpdate();
 
   </script>
 
 </body>
- </html>
+                                        </html>
