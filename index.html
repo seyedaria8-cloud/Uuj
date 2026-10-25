@@ -142,14 +142,9 @@
   .order-box::before { content: ''; position: absolute; top: -1px; right: 10%; width: 80%; height: 2px; background: linear-gradient(90deg, transparent, var(--primary-blue), var(--neon-pink), transparent); }
   .order-box p { color: var(--text-muted); line-height: 1.8; margin-bottom: 30px; font-size: 1.05rem; }
   
-  /* دکمه کپی جدید */
   .copy-container { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 25px; direction: ltr; }
   .id-text { font-size: 1.3rem; color: var(--primary-blue); font-weight: 900; text-shadow: 0 0 15px rgba(0, 240, 255, 0.5); }
-  .copy-btn { 
-    background: rgba(0, 240, 255, 0.1); border: 1px solid var(--primary-blue); color: var(--primary-blue); 
-    padding: 8px 15px; border-radius: 10px; cursor: pointer; font-size: 0.9rem; font-weight: 700; 
-    transition: 0.3s; display: flex; align-items: center; gap: 5px;
-  }
+  .copy-btn { background: rgba(0, 240, 255, 0.1); border: 1px solid var(--primary-blue); color: var(--primary-blue); padding: 8px 15px; border-radius: 10px; cursor: pointer; font-size: 0.9rem; font-weight: 700; transition: 0.3s; display: flex; align-items: center; gap: 5px; }
   .copy-btn:hover { background: var(--primary-blue); color: #000; box-shadow: 0 0 15px var(--primary-blue); }
 
   .contact-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 18px 45px; border-radius: 50px; background: linear-gradient(135deg, var(--primary-blue), var(--secondary-cyan)); color: #000; font-size: 1.2rem; font-weight: 900; text-decoration: none; transition: 0.4s; box-shadow: 0 0 25px rgba(0, 240, 255, 0.5); width: 100%; max-width: 350px; }
@@ -169,6 +164,18 @@
   
   .stock-badge { position: absolute; top: 20px; left: 20px; background: rgba(0, 240, 255, 0.15); border: 1px solid var(--primary-blue); color: var(--primary-blue); font-size: 0.8rem; font-weight: 700; padding: 6px 15px; border-radius: 30px; box-shadow: 0 0 15px rgba(0, 240, 255, 0.4); display: flex; align-items: center; gap: 5px; animation: badgePulse 2s infinite; }
   @keyframes badgePulse { 0%, 100% { box-shadow: 0 0 10px rgba(0, 240, 255, 0.2); } 50% { box-shadow: 0 0 25px rgba(0, 240, 255, 0.6); } }
+
+  /* 🟢 استایل جدید: تایمر تخفیف 🟢 */
+  .discount-timer {
+    position: absolute; top: 20px; right: 20px;
+    background: rgba(255, 0, 228, 0.15); border: 1px solid var(--neon-pink);
+    color: var(--neon-pink); font-size: 0.8rem; font-weight: 900;
+    padding: 6px 15px; border-radius: 30px;
+    box-shadow: 0 0 15px rgba(255, 0, 228, 0.4);
+    display: flex; align-items: center; gap: 5px; direction: ltr;
+    animation: timerPulse 1s infinite;
+  }
+  @keyframes timerPulse { 0%, 100% { box-shadow: 0 0 10px rgba(255, 0, 228, 0.3); } 50% { box-shadow: 0 0 25px rgba(255, 0, 228, 0.8); } }
 
   .shop-card .icon-circle { width: 60px; height: 60px; border-radius: 50%; background: rgba(0, 240, 255, 0.1); border: 1px solid var(--primary-blue); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin: 0 auto 20px; color: var(--primary-blue); box-shadow: 0 0 15px rgba(0,240,255,0.2); }
   .shop-card h3 { font-size: 1.4rem; color: #fff; margin-bottom: 20px; }
@@ -191,25 +198,10 @@
   /* ================= صفحه پشتیبانی (Modal) ================= */
   .support-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(3, 6, 16, 0.98); z-index: 3000; display: flex; flex-direction: column; align-items: center; padding: 80px 20px 40px; overflow-y: auto; opacity: 0; visibility: hidden; transition: 0.5s; backdrop-filter: blur(20px); }
   .support-modal.active { opacity: 1; visibility: visible; }
-  
-  .support-card {
-    background: var(--card-bg); border: 1px solid rgba(0, 240, 255, 0.3); border-radius: 30px;
-    padding: 50px 30px; max-width: 600px; width: 100%; backdrop-filter: blur(20px);
-    text-align: center; margin-top: 40px; box-shadow: 0 0 60px rgba(0, 240, 255, 0.1);
-    position: relative;
-  }
-  .support-card::before {
-    content: ''; position: absolute; top: -1px; right: 10%; width: 80%; height: 2px;
-    background: linear-gradient(90deg, transparent, var(--primary-blue), var(--neon-pink), transparent);
-  }
-  .support-card h2 {
-    font-size: 1.8rem; color: var(--primary-blue); text-shadow: 0 0 20px rgba(0,240,255,0.5);
-    margin-bottom: 25px;
-  }
-  .support-card p {
-    font-size: 1rem; color: var(--text-color); line-height: 1.9; margin-bottom: 30px;
-    background: rgba(255,255,255,0.03); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05);
-  }
+  .support-card { background: var(--card-bg); border: 1px solid rgba(0, 240, 255, 0.3); border-radius: 30px; padding: 50px 30px; max-width: 600px; width: 100%; backdrop-filter: blur(20px); text-align: center; margin-top: 40px; box-shadow: 0 0 60px rgba(0, 240, 255, 0.1); position: relative; }
+  .support-card::before { content: ''; position: absolute; top: -1px; right: 10%; width: 80%; height: 2px; background: linear-gradient(90deg, transparent, var(--primary-blue), var(--neon-pink), transparent); }
+  .support-card h2 { font-size: 1.8rem; color: var(--primary-blue); text-shadow: 0 0 20px rgba(0,240,255,0.5); margin-bottom: 25px; }
+  .support-card p { font-size: 1rem; color: var(--text-color); line-height: 1.9; margin-bottom: 30px; background: rgba(255,255,255,0.03); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05); }
 
   /* ================= فوتر ================= */
   footer { text-align: center; padding: 40px; border-top: 1px solid rgba(0, 240, 255, 0.1); color: var(--text-muted); font-size: 0.9rem; margin-top: 50px; background: linear-gradient(to top, rgba(0, 240, 255, 0.03), transparent); }
@@ -219,6 +211,8 @@
     header { width: 95%; left: 2.5%; padding: 15px 20px; top: 10px; }
     .sidebar { width: 85%; right: -100%; }
     .shop-card, .support-card { padding: 25px 15px; }
+    .discount-timer { font-size: 0.7rem; padding: 5px 10px; top: 15px; right: 15px; }
+    .stock-badge { font-size: 0.7rem; padding: 5px 10px; top: 15px; left: 15px; }
   }
 </style>
 </head>
@@ -281,6 +275,9 @@
 
     <div class="shop-card">
       <div class="stock-badge">✨ ۴ تا موجود است</div>
+      <!-- ⏱️ تایمر تخفیف جدید ⏱️ -->
+      <div class="discount-timer" id="timer">⏱️ 05:00:00</div>
+      
       <div class="icon-circle">📺</div>
       <h3>کانال آماده (روبیکا)</h3>
       <div class="price-box"><span>۳۰,۰۰۰</span> تومان</div>
@@ -302,7 +299,6 @@
       <p>
         جهت مطرح کردن هرگونه سوال ، پیشنهاد ، نظر ، انتقاد و پیگیری سفارش می توانید به این آیدی در روبیکا پیام دهید. پیام شما حداکثر تا ۷۲ ساعت بعد مطرح کردن پاسخ داده خواهد شد.
       </p>
-      
       <div class="copy-container">
         <span class="id-text">@Raavo_87</span>
         <button class="copy-btn" onclick="copyID()">📋 کپی</button>
@@ -347,7 +343,6 @@
       <p>برای ثبت سفارش و دریافت مشاوره، کافیه به آیدی زیر در روبیکا پیام بدید. تیم پشتیبانی ما در سریع‌ترین زمان پاسخگوی شماست.</p>
       <a href="https://rubika.ir/Raavo_87" class="contact-btn">💬 ارسال پیام در روبیکا</a>
       
-      <!-- دکمه کپی جدید کنار آیدی -->
       <div class="copy-container">
         <span class="id-text">@Raavo_87</span>
         <button class="copy-btn" onclick="copyID()">📋 کپی</button>
@@ -365,7 +360,6 @@
     function openSidebar() { document.getElementById('sidebar').classList.add('active'); document.getElementById('sidebarOverlay').classList.add('active'); }
     function closeSidebar() { document.getElementById('sidebar').classList.remove('active'); document.getElementById('sidebarOverlay').classList.remove('active'); }
 
-    // زمان پیام به 11 ثانیه کاهش یافت
     function showComingSoon(title) {
       const toast = document.getElementById('toast');
       toast.textContent = `⏳ بخش «${title}» به زودی اضافه خواهد شد!`;
@@ -378,11 +372,9 @@
     function openShop() { closeSidebar(); document.getElementById('shopModal').classList.add('active'); }
     function closeShop() { document.getElementById('shopModal').classList.remove('active'); }
 
-    // توابع صفحه پشتیبانی
     function openSupport() { closeSidebar(); document.getElementById('supportModal').classList.add('active'); }
     function closeSupport() { document.getElementById('supportModal').classList.remove('active'); }
 
-    // تابع کپی کردن آیدی
     function copyID() {
       const id = "@Raavo_87";
       navigator.clipboard.writeText(id).then(() => {
@@ -392,15 +384,54 @@
         toast.style.color = "#00ff9d";
         toast.style.background = "rgba(0, 255, 157, 0.15)";
         toast.classList.add('show');
-        
         clearTimeout(toastTimer);
         toastTimer = setTimeout(() => { toast.classList.remove('show'); }, 3000); 
       }).catch(err => {
-        // در صورت عدم دسترسی به کلیپ بورد
         alert('آیدی: ' + id);
       });
     }
+
+    // ================= 🕒 تایمر تخفیف هوشمند =================
+    let totalSeconds;
+    let timerInterval;
+
+    // تابع برای شروع تایمر با یک عدد تصادفی جدید
+    function startRandomTimer() {
+      // تولید یک عدد تصادفی بین 1 تا 5 ساعت
+      const randomHours = Math.floor(Math.random() * 5) + 1; 
+      totalSeconds = randomHours * 3600; // تبدیل به ثانیه
+      updateTimerDisplay();
+    }
+
+    // تابع برای آپدیت نمایش تایمر
+    function updateTimerDisplay() {
+      const hours = Math.floor(totalSeconds / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      // فرمت کردن اعداد دو رقمی
+      const h = String(hours).padStart(2, '0');
+      const m = String(minutes).padStart(2, '0');
+      const s = String(seconds).padStart(2, '0');
+
+      document.getElementById('timer').innerText = `⏱️ ${h}:${m}:${s}`;
+    }
+
+    // شروع تایمر اولیه با یک عدد تصادفی
+    startRandomTimer();
+
+    // هر ثانیه یک بار تایمر را کم کن
+    timerInterval = setInterval(() => {
+      if (totalSeconds > 0) {
+        totalSeconds--;
+        updateTimerDisplay();
+      } else {
+        // وقتی به صفر رسید، یک تایمر جدید تصادفی شروع کن
+        startRandomTimer();
+      }
+    }, 1000);
+
   </script>
 
 </body>
-                               </html>
+     </html>
