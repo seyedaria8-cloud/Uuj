@@ -48,6 +48,28 @@
     border-bottom: 1px solid rgba(0, 240, 255, 0.2);
   }
 
+  .header-left {
+    display: flex;
+    align-items: center;
+  }
+
+  .menu-btn {
+    background: transparent;
+    border: none;
+    color: var(--primary-blue);
+    font-size: 2rem;
+    cursor: pointer;
+    font-weight: 900;
+    transition: 0.3s;
+    text-shadow: 0 0 10px var(--primary-blue);
+    padding: 0 10px;
+  }
+
+  .menu-btn:hover {
+    transform: scale(1.2);
+    text-shadow: 0 0 20px var(--primary-blue);
+  }
+
   .logo {
     font-size: 1.5rem;
     font-weight: 900;
@@ -58,22 +80,107 @@
     gap: 10px;
   }
 
-  .nav-links {
-    display: flex;
-    gap: 25px;
-    list-style: none;
-  }
-
-  .nav-links a {
-    text-decoration: none;
-    color: var(--text-color);
-    font-weight: 700;
+  /* ================= منوی کناری (Sidebar) ================= */
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+    z-index: 1998;
+    opacity: 0;
+    visibility: hidden;
     transition: 0.3s;
   }
 
-  .nav-links a:hover {
+  .sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 280px;
+    height: 100%;
+    background: rgba(10, 20, 35, 0.95);
+    backdrop-filter: blur(20px);
+    border-left: 2px solid var(--primary-blue);
+    box-shadow: -10px 0 40px rgba(0, 240, 255, 0.2);
+    z-index: 1999;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    padding-top: 80px;
+  }
+
+  .sidebar.active {
+    right: 0;
+  }
+
+  .sidebar-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: #ff4444;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .sidebar-close:hover {
+    transform: rotate(90deg);
+  }
+
+  .sidebar-item {
+    padding: 20px 30px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-color);
+    cursor: pointer;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .sidebar-item:hover {
+    background: rgba(0, 240, 255, 0.1);
     color: var(--primary-blue);
-    text-shadow: 0 0 10px var(--primary-blue);
+    padding-right: 40px;
+  }
+
+  /* ================= پیام سبز رنگ (Toast) ================= */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: rgba(0, 255, 157, 0.15);
+    border: 1px solid #00ff9d;
+    color: #00ff9d;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-weight: 700;
+    box-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
+    z-index: 2000;
+    opacity: 0;
+    transition: 0.5s;
+    pointer-events: none;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+  }
+
+  .toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
   }
 
   /* ================= بخش هیرو ================= */
@@ -280,7 +387,6 @@
 
   @media (max-width: 768px) {
     .hero h1 { font-size: 2rem; }
-    .nav-links { display: none; }
   }
 </style>
 </head>
@@ -288,13 +394,27 @@
 
   <!-- هدر -->
   <header>
+    <div class="header-left">
+      <!-- دکمه سه نقطه سمت چپ -->
+      <button class="menu-btn" onclick="openSidebar()">⋮</button>
+    </div>
     <div class="logo">⚡ نئون شاپ</div>
-    <ul class="nav-links">
-      <li><a href="#home">خانه</a></li>
-      <li><a href="#pricing">تعرفه‌ها</a></li>
-      <li><a href="#order">سفارش</a></li>
-    </ul>
+    <div style="width: 40px;"></div> <!-- برای تعادل -->
   </header>
+
+  <!-- منوی کناری -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+  <div class="sidebar" id="sidebar">
+    <button class="sidebar-close" onclick="closeSidebar()">✕</button>
+    <div class="sidebar-item" onclick="showComingSoon('فروشگاه')">🛒 فروشگاه</div>
+    <div class="sidebar-item" onclick="showComingSoon('لیدربرد')">🏆 لیدربرد</div>
+    <div class="sidebar-item" onclick="showComingSoon('قوانین')">📜 قوانین</div>
+    <div class="sidebar-item" onclick="showComingSoon('پشتیبانی')">🎧 پشتیبانی</div>
+    <div class="sidebar-item" onclick="showComingSoon('آموزش')">📚 آموزش</div>
+  </div>
+
+  <!-- پیام سبز رنگ -->
+  <div class="toast" id="toast">به زودی اضافه خواهد شد!</div>
 
   <!-- هیرو -->
   <section class="hero" id="home">
@@ -347,7 +467,7 @@
     </div>
   </section>
 
-  <!-- بخش سفارش (بدون درگاه) -->
+  <!-- بخش سفارش -->
   <section class="order-section" id="order">
     <div class="order-box">
       <h2 class="section-title" style="margin-bottom: 20px;">ثبت <span>سفارش</span></h2>
@@ -367,5 +487,43 @@
     © ۲۰۲۵ نئون شاپ | تمامی حقوق محفوظ است.
   </footer>
 
+  <!-- اسکریپت -->
+  <script>
+    // متغیر برای نگه داشتن تایمر پیام
+    let toastTimer;
+
+    // باز کردن منو
+    function openSidebar() {
+      document.getElementById('sidebar').classList.add('active');
+      document.getElementById('sidebarOverlay').classList.add('active');
+    }
+
+    // بستن منو
+    function closeSidebar() {
+      document.getElementById('sidebar').classList.remove('active');
+      document.getElementById('sidebarOverlay').classList.remove('active');
+    }
+
+    // نمایش پیام "به زودی"
+    function showComingSoon(title) {
+      const toast = document.getElementById('toast');
+      toast.textContent = `⏳ بخش «${title}» به زودی اضافه خواهد شد!`;
+      
+      // نمایش پیام
+      toast.classList.add('show');
+
+      // بستن منو
+      closeSidebar();
+
+      // پاک کردن تایمر قبلی اگر وجود داشته باشد
+      clearTimeout(toastTimer);
+
+      // تنظیم تایمر برای مخفی کردن پیام بعد از 30 ثانیه
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 30000); 
+    }
+  </script>
+
 </body>
-  </html>
+ </html>
