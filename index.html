@@ -143,7 +143,21 @@
   .order-box p { color: var(--text-muted); line-height: 1.8; margin-bottom: 30px; font-size: 1.05rem; }
   
   .copy-container { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 25px; direction: ltr; }
-  .id-text { font-size: 1.3rem; color: var(--primary-blue); font-weight: 900; text-shadow: 0 0 15px rgba(0, 240, 255, 0.5); }
+  
+  /* 🪨 استایل جدید: آیدی حکاکی شده روی سنگ 🪨 */
+  .id-text { 
+    font-size: 1.6rem; 
+    font-weight: 900; 
+    color: #2a3a55; /* رنگ تیره سنگ */
+    direction: ltr;
+    letter-spacing: 2px;
+    /* افکت حکاکی: سایه روشن در بالا و سایه تیره در پایین */
+    text-shadow: 
+      1px 1px 0px rgba(255, 255, 255, 0.1), 
+      -1px -1px 0px rgba(0, 0, 0, 0.8),
+      0 0 15px rgba(0, 240, 255, 0.2); 
+  }
+
   .copy-btn { background: rgba(0, 240, 255, 0.1); border: 1px solid var(--primary-blue); color: var(--primary-blue); padding: 8px 15px; border-radius: 10px; cursor: pointer; font-size: 0.9rem; font-weight: 700; transition: 0.3s; display: flex; align-items: center; gap: 5px; }
   .copy-btn:hover { background: var(--primary-blue); color: #000; box-shadow: 0 0 15px var(--primary-blue); }
 
@@ -153,6 +167,17 @@
   /* ================= صفحه فروشگاه (Modal) ================= */
   .shop-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(3, 6, 16, 0.98); z-index: 3000; display: flex; flex-direction: column; align-items: center; padding: 80px 20px 40px; overflow-y: auto; opacity: 0; visibility: hidden; transition: 0.5s; backdrop-filter: blur(20px); }
   .shop-modal.active { opacity: 1; visibility: visible; }
+  
+  /* دکمه بازگشت به صفحه اصلی بالای فروشگاه */
+  .top-back-btn {
+    position: absolute; top: 20px; left: 20px; background: rgba(0, 240, 255, 0.1);
+    border: 1px solid var(--primary-blue); color: var(--primary-blue);
+    padding: 10px 20px; border-radius: 50px; font-weight: 700; cursor: pointer;
+    display: flex; align-items: center; gap: 8px; transition: 0.3s; text-decoration: none;
+    font-size: 0.9rem;
+  }
+  .top-back-btn:hover { background: var(--primary-blue); color: #000; box-shadow: 0 0 20px var(--primary-blue); }
+
   .shop-header { text-align: center; margin-bottom: 30px; margin-top: 40px; }
   .shop-header .icon-box { width: 80px; height: 80px; border-radius: 25px; background: rgba(0, 240, 255, 0.1); border: 1px solid var(--primary-blue); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 15px; box-shadow: 0 0 30px rgba(0, 240, 255, 0.3); animation: floatIcon 3s ease-in-out infinite; }
   @keyframes floatIcon { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
@@ -165,7 +190,7 @@
   .stock-badge { position: absolute; top: 20px; left: 20px; background: rgba(0, 240, 255, 0.15); border: 1px solid var(--primary-blue); color: var(--primary-blue); font-size: 0.8rem; font-weight: 700; padding: 6px 15px; border-radius: 30px; box-shadow: 0 0 15px rgba(0, 240, 255, 0.4); display: flex; align-items: center; gap: 5px; animation: badgePulse 2s infinite; }
   @keyframes badgePulse { 0%, 100% { box-shadow: 0 0 10px rgba(0, 240, 255, 0.2); } 50% { box-shadow: 0 0 25px rgba(0, 240, 255, 0.6); } }
 
-  /* 🟢 استایل جدید: تایمر تخفیف 🟢 */
+  /* 🟢 تایمر تخفیف با متن 30 درصد 🟢 */
   .discount-timer {
     position: absolute; top: 20px; right: 20px;
     background: rgba(255, 0, 228, 0.15); border: 1px solid var(--neon-pink);
@@ -176,6 +201,10 @@
     animation: timerPulse 1s infinite;
   }
   @keyframes timerPulse { 0%, 100% { box-shadow: 0 0 10px rgba(255, 0, 228, 0.3); } 50% { box-shadow: 0 0 25px rgba(255, 0, 228, 0.8); } }
+  
+  .discount-label {
+    font-size: 0.7rem; color: #fff; margin-left: 5px; font-weight: 700;
+  }
 
   .shop-card .icon-circle { width: 60px; height: 60px; border-radius: 50%; background: rgba(0, 240, 255, 0.1); border: 1px solid var(--primary-blue); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin: 0 auto 20px; color: var(--primary-blue); box-shadow: 0 0 15px rgba(0,240,255,0.2); }
   .shop-card h3 { font-size: 1.4rem; color: #fff; margin-bottom: 20px; }
@@ -245,6 +274,9 @@
 
   <!-- ================= صفحه فروشگاه (Modal) ================= -->
   <div class="shop-modal" id="shopModal">
+    <!-- دکمه بازگشت به صفحه اصلی بالای صفحه -->
+    <a href="#" class="top-back-btn" onclick="closeShop()">← بازگشت به صفحه اصلی</a>
+    
     <div class="shop-header">
       <div class="icon-box">🛍️</div>
       <h2>فروشگاه نئون شاپ</h2>
@@ -275,8 +307,12 @@
 
     <div class="shop-card">
       <div class="stock-badge">✨ ۴ تا موجود است</div>
-      <!-- ⏱️ تایمر تخفیف جدید ⏱️ -->
-      <div class="discount-timer" id="timer">⏱️ 05:00:00</div>
+      
+      <!-- ⏱️ تایمر تخفیف با متن 30 درصد ⏱️ -->
+      <div class="discount-timer">
+        <span class="discount-label">۳۰٪ تخفیف ویژه</span>
+        <span id="timer">⏱️ 05:00:00</span>
+      </div>
       
       <div class="icon-circle">📺</div>
       <h3>کانال آماده (روبیکا)</h3>
@@ -319,7 +355,7 @@
     <h2 class="section-title">آمار <span>پلتفرم</span></h2>
     <div class="stats-grid">
       <div class="stat-card">
-        <div class="stat-number">۶</div>
+        <div class="stat-number" id="user-count">۶</div>
         <div class="stat-label">تعداد کاربران سایت</div>
       </div>
     </div>
@@ -344,6 +380,7 @@
       <a href="https://rubika.ir/Raavo_87" class="contact-btn">💬 ارسال پیام در روبیکا</a>
       
       <div class="copy-container">
+        <!-- 🪨 آیدی حکاکی شده روی سنگ -->
         <span class="id-text">@Raavo_87</span>
         <button class="copy-btn" onclick="copyID()">📋 کپی</button>
       </div>
@@ -395,43 +432,56 @@
     let totalSeconds;
     let timerInterval;
 
-    // تابع برای شروع تایمر با یک عدد تصادفی جدید
     function startRandomTimer() {
-      // تولید یک عدد تصادفی بین 1 تا 5 ساعت
       const randomHours = Math.floor(Math.random() * 5) + 1; 
-      totalSeconds = randomHours * 3600; // تبدیل به ثانیه
+      totalSeconds = randomHours * 3600; 
       updateTimerDisplay();
     }
 
-    // تابع برای آپدیت نمایش تایمر
     function updateTimerDisplay() {
       const hours = Math.floor(totalSeconds / 3600);
       const minutes = Math.floor((totalSeconds % 3600) / 60);
       const seconds = totalSeconds % 60;
-
-      // فرمت کردن اعداد دو رقمی
       const h = String(hours).padStart(2, '0');
       const m = String(minutes).padStart(2, '0');
       const s = String(seconds).padStart(2, '0');
-
       document.getElementById('timer').innerText = `⏱️ ${h}:${m}:${s}`;
     }
 
-    // شروع تایمر اولیه با یک عدد تصادفی
     startRandomTimer();
-
-    // هر ثانیه یک بار تایمر را کم کن
     timerInterval = setInterval(() => {
       if (totalSeconds > 0) {
         totalSeconds--;
         updateTimerDisplay();
       } else {
-        // وقتی به صفر رسید، یک تایمر جدید تصادفی شروع کن
         startRandomTimer();
       }
     }, 1000);
 
+    // ================= 🔢 تعداد کاربران متحرک =================
+    let currentUsers = 6;
+    const userCountEl = document.getElementById('user-count');
+    
+    function updateUserCount() {
+      // تغییر تصادفی بین -1 و +1 برای طبیعی بودن
+      const change = Math.floor(Math.random() * 3) - 1; 
+      
+      // جلوگیری از منفی شدن یا پرش‌های خیلی بزرگ
+      if (currentUsers + change >= 0 && currentUsers + change <= 20) {
+        currentUsers += change;
+      } else if (currentUsers + change < 0) {
+        currentUsers += 1; // اگر منفی شد، زیاد کن
+      } else if (currentUsers + change > 20) {
+        currentUsers -= 1; // اگر زیاد شد، کم کن
+      }
+      
+      userCountEl.innerText = currentUsers.toLocaleString('fa-IR');
+    }
+
+    // هر ۳ تا ۷ ثانیه یک بار عدد رو کمی تغییر بده
+    setInterval(updateUserCount, Math.floor(Math.random() * 4000) + 3000);
+
   </script>
 
 </body>
-     </html>
+ </html>
