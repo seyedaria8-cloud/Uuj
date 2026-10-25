@@ -319,4 +319,88 @@
   </section>
 
   <!-- آمار پلتفرم -->
-  <section class="stats-section"
+  <section class="stats-section" id="stats">
+    <h2 class="section-title">آمار <span>پلتفرم</span></h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">۶</div>
+        <div class="stat-label">تعداد کاربران سایت</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ویژگی‌ها -->
+  <section class="features-section" id="features">
+    <h2 class="section-title">چرا <span>نئون شاپ</span>؟</h2>
+    <div class="features-grid">
+      <div class="feature-card"><span class="feature-icon">⚡</span><h3>سرعت بالا</h3><p>سفارشات شما در کمترین زمان ممکن و به صورت کاملاً خودکار پردازش و تحویل داده می‌شوند.</p></div>
+      <div class="feature-card"><span class="feature-icon">🛡️</span><h3>خریدهای تضمینی</h3><p>تمامی خدمات ما دارای گارانتی و ضمانت هستند. در صورت بروز هرگونه مشکل، جایگزینی انجام می‌شود.</p></div>
+      <div class="feature-card"><span class="feature-icon">🎧</span><h3>پشتیبانی ۲۴/۷</h3><p>تیم پشتیبانی ما در تمام ساعات شبانه‌روز آماده پاسخگویی به سوالات و مشکلات شماست.</p></div>
+      <div class="feature-card"><span class="feature-icon">💎</span><h3>کیفیت و قیمت</h3><p>سفارش‌های متنوع با کیفیت بالا و قیمتی کاملاً زیر بازار. بهترین انتخاب برای رشد شما.</p></div>
+    </div>
+  </section>
+
+  <!-- بخش سفارش -->
+  <section class="order-section" id="order">
+    <div class="order-box">
+      <h2 class="section-title" style="margin-bottom: 20px;">ثبت <span>سفارش</span></h2>
+      <p>برای ثبت سفارش و دریافت مشاوره، کافیه به آیدی زیر در روبیکا پیام بدید. تیم پشتیبانی ما در سریع‌ترین زمان پاسخگوی شماست.</p>
+      <a href="https://rubika.ir/Raavo_87" class="contact-btn">💬 ارسال پیام در روبیکا</a>
+      
+      <!-- دکمه کپی جدید کنار آیدی -->
+      <div class="copy-container">
+        <span class="id-text">@Raavo_87</span>
+        <button class="copy-btn" onclick="copyID()">📋 کپی</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- فوتر -->
+  <footer>© ۲۰۲۵ نئون شاپ | تمامی حقوق محفوظ است.</footer>
+
+  <!-- اسکریپت -->
+  <script>
+    let toastTimer;
+
+    function openSidebar() { document.getElementById('sidebar').classList.add('active'); document.getElementById('sidebarOverlay').classList.add('active'); }
+    function closeSidebar() { document.getElementById('sidebar').classList.remove('active'); document.getElementById('sidebarOverlay').classList.remove('active'); }
+
+    // زمان پیام به 11 ثانیه کاهش یافت
+    function showComingSoon(title) {
+      const toast = document.getElementById('toast');
+      toast.textContent = `⏳ بخش «${title}» به زودی اضافه خواهد شد!`;
+      toast.classList.add('show');
+      closeSidebar();
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => { toast.classList.remove('show'); }, 11000); 
+    }
+
+    function openShop() { closeSidebar(); document.getElementById('shopModal').classList.add('active'); }
+    function closeShop() { document.getElementById('shopModal').classList.remove('active'); }
+
+    // توابع صفحه پشتیبانی
+    function openSupport() { closeSidebar(); document.getElementById('supportModal').classList.add('active'); }
+    function closeSupport() { document.getElementById('supportModal').classList.remove('active'); }
+
+    // تابع کپی کردن آیدی
+    function copyID() {
+      const id = "@Raavo_87";
+      navigator.clipboard.writeText(id).then(() => {
+        const toast = document.getElementById('toast');
+        toast.textContent = "✅ آیدی با موفقیت کپی شد!";
+        toast.style.borderColor = "#00ff9d";
+        toast.style.color = "#00ff9d";
+        toast.style.background = "rgba(0, 255, 157, 0.15)";
+        toast.classList.add('show');
+        
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => { toast.classList.remove('show'); }, 3000); 
+      }).catch(err => {
+        // در صورت عدم دسترسی به کلیپ بورد
+        alert('آیدی: ' + id);
+      });
+    }
+  </script>
+
+</body>
+                               </html>
