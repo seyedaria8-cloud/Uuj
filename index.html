@@ -11,10 +11,12 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Vazirmatn', sans-serif;
+    scroll-behavior: smooth;
   }
 
   :root {
     --primary-blue: #00f0ff;
+    --secondary-cyan: #00ffcc;
     --dark-blue: #0088cc;
     --bg-color: #050a14;
     --card-bg: rgba(10, 20, 35, 0.8);
@@ -28,8 +30,8 @@
     min-height: 100vh;
     overflow-x: hidden;
     background-image: 
-      radial-gradient(circle at 15% 20%, rgba(0, 240, 255, 0.1) 0%, transparent 40%),
-      radial-gradient(circle at 85% 80%, rgba(0, 136, 204, 0.1) 0%, transparent 40%);
+      radial-gradient(circle at 15% 20%, rgba(0, 240, 255, 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 85% 80%, rgba(0, 255, 204, 0.12) 0%, transparent 40%);
     background-attachment: fixed;
   }
 
@@ -48,341 +50,154 @@
     border-bottom: 1px solid rgba(0, 240, 255, 0.2);
   }
 
-  .header-left {
-    display: flex;
-    align-items: center;
-  }
+  .header-left { display: flex; align-items: center; }
 
   .menu-btn {
-    background: transparent;
-    border: none;
-    color: var(--primary-blue);
-    font-size: 2rem;
-    cursor: pointer;
-    font-weight: 900;
-    transition: 0.3s;
-    text-shadow: 0 0 10px var(--primary-blue);
-    padding: 0 10px;
+    background: transparent; border: none; color: var(--primary-blue);
+    font-size: 2rem; cursor: pointer; font-weight: 900; transition: 0.3s;
+    text-shadow: 0 0 10px var(--primary-blue); padding: 0 10px;
   }
-
-  .menu-btn:hover {
-    transform: scale(1.2);
-    text-shadow: 0 0 20px var(--primary-blue);
-  }
+  .menu-btn:hover { transform: scale(1.2); text-shadow: 0 0 20px var(--primary-blue); }
 
   .logo {
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: var(--primary-blue);
+    font-size: 1.5rem; font-weight: 900; color: var(--primary-blue);
     text-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    display: flex; align-items: center; gap: 10px;
   }
 
-  /* ================= منوی کناری (Sidebar) ================= */
+  /* ================= منوی کناری ================= */
   .sidebar-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(3px);
-    z-index: 1998;
-    opacity: 0;
-    visibility: hidden;
-    transition: 0.3s;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(3px);
+    z-index: 1998; opacity: 0; visibility: hidden; transition: 0.3s;
   }
-
-  .sidebar-overlay.active {
-    opacity: 1;
-    visibility: visible;
-  }
+  .sidebar-overlay.active { opacity: 1; visibility: visible; }
 
   .sidebar {
-    position: fixed;
-    top: 0;
-    right: -300px;
-    width: 280px;
-    height: 100%;
-    background: rgba(10, 20, 35, 0.95);
-    backdrop-filter: blur(20px);
+    position: fixed; top: 0; right: -300px; width: 280px; height: 100%;
+    background: rgba(10, 20, 35, 0.95); backdrop-filter: blur(20px);
     border-left: 2px solid var(--primary-blue);
     box-shadow: -10px 0 40px rgba(0, 240, 255, 0.2);
-    z-index: 1999;
-    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    display: flex;
-    flex-direction: column;
-    padding-top: 80px;
+    z-index: 1999; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex; flex-direction: column; padding-top: 80px;
   }
-
-  .sidebar.active {
-    right: 0;
-  }
-
+  .sidebar.active { right: 0; }
   .sidebar-close {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: transparent;
-    border: none;
-    color: #ff4444;
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: 0.3s;
+    position: absolute; top: 20px; right: 20px; background: transparent;
+    border: none; color: #ff4444; font-size: 1.5rem; cursor: pointer; transition: 0.3s;
   }
-
-  .sidebar-close:hover {
-    transform: rotate(90deg);
-  }
-
+  .sidebar-close:hover { transform: rotate(90deg); }
   .sidebar-item {
-    padding: 20px 30px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--text-color);
-    cursor: pointer;
-    border-bottom: 1px solid rgba(0, 240, 255, 0.1);
-    transition: 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 15px;
+    padding: 20px 30px; font-size: 1.1rem; font-weight: 700; color: var(--text-color);
+    cursor: pointer; border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+    transition: 0.3s; display: flex; align-items: center; gap: 15px;
   }
-
   .sidebar-item:hover {
-    background: rgba(0, 240, 255, 0.1);
-    color: var(--primary-blue);
-    padding-right: 40px;
+    background: rgba(0, 240, 255, 0.1); color: var(--primary-blue); padding-right: 40px;
   }
 
-  /* ================= پیام سبز رنگ (Toast) ================= */
+  /* ================= پیام سبز رنگ ================= */
   .toast {
-    position: fixed;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    background: rgba(0, 255, 157, 0.15);
-    border: 1px solid #00ff9d;
-    color: #00ff9d;
-    padding: 15px 30px;
-    border-radius: 10px;
-    font-weight: 700;
-    box-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
-    z-index: 2000;
-    opacity: 0;
-    transition: 0.5s;
-    pointer-events: none;
-    text-align: center;
-    width: 90%;
-    max-width: 400px;
+    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px);
+    background: rgba(0, 255, 157, 0.15); border: 1px solid #00ff9d; color: #00ff9d;
+    padding: 15px 30px; border-radius: 10px; font-weight: 700;
+    box-shadow: 0 0 20px rgba(0, 255, 157, 0.3); z-index: 2000; opacity: 0;
+    transition: 0.5s; pointer-events: none; text-align: center; width: 90%; max-width: 400px;
   }
-
-  .toast.show {
-    transform: translateX(-50%) translateY(0);
-    opacity: 1;
-  }
+  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
   /* ================= بخش هیرو ================= */
   .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 100px 20px 50px;
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+    align-items: center; text-align: center; padding: 100px 20px 50px;
   }
-
-  .hero h1 {
-    font-size: 3rem;
-    font-weight: 900;
-    line-height: 1.4;
-    margin-bottom: 20px;
-  }
-
-  .hero h1 span {
-    color: var(--primary-blue);
-    text-shadow: 0 0 20px var(--primary-blue);
-  }
-
+  .hero h1 { font-size: 3rem; font-weight: 900; line-height: 1.4; margin-bottom: 20px; }
+  .hero h1 span { color: var(--primary-blue); text-shadow: 0 0 20px var(--primary-blue); }
   .hero p {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    max-width: 600px;
-    margin-bottom: 40px;
-    line-height: 1.8;
+    font-size: 1.1rem; color: var(--text-muted); max-width: 600px;
+    margin-bottom: 40px; line-height: 1.8;
   }
-
   .btn {
-    padding: 15px 40px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 900;
-    font-size: 1.1rem;
-    transition: 0.4s;
-    display: inline-block;
-    border: 2px solid var(--primary-blue);
-    color: var(--primary-blue);
-    background: transparent;
-    box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+    padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: 900;
+    font-size: 1.1rem; transition: 0.4s; display: inline-block;
+    border: 2px solid var(--primary-blue); color: var(--primary-blue);
+    background: transparent; box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
   }
-
   .btn:hover {
-    background: var(--primary-blue);
-    color: var(--bg-color);
-    box-shadow: 0 0 30px var(--primary-blue);
-    transform: translateY(-3px);
+    background: var(--primary-blue); color: var(--bg-color);
+    box-shadow: 0 0 30px var(--primary-blue); transform: translateY(-3px);
   }
 
-  /* ================= بخش تعرفه‌ها ================= */
-  .pricing {
-    padding: 80px 5%;
-    text-align: center;
+  /* ================= بخش آمار ================= */
+  .stats-section { padding: 60px 5%; text-align: center; }
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px; max-width: 800px; margin: 0 auto;
   }
-
-  .section-title {
-    font-size: 2rem;
-    font-weight: 900;
-    margin-bottom: 50px;
+  .stat-card {
+    background: var(--card-bg); border: 1px solid rgba(0, 240, 255, 0.2);
+    border-radius: 20px; padding: 30px 20px; backdrop-filter: blur(10px);
+    transition: 0.4s; position: relative; overflow: hidden;
   }
-
-  .section-title span {
-    color: var(--primary-blue);
+  .stat-card::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary-blue), transparent);
   }
-
-  .pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    max-width: 1100px;
-    margin: 0 auto;
+  .stat-card:hover {
+    border-color: var(--primary-blue); box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+    transform: translateY(-5px);
   }
-
-  .price-card {
-    background: var(--card-bg);
-    border: 1px solid rgba(0, 240, 255, 0.2);
-    border-radius: 20px;
-    padding: 40px 20px;
-    position: relative;
-    transition: 0.4s;
-    backdrop-filter: blur(10px);
+  .stat-number {
+    font-size: 3rem; font-weight: 900; color: var(--primary-blue);
+    text-shadow: 0 0 20px rgba(0, 240, 255, 0.5); direction: ltr; margin-bottom: 10px;
   }
+  .stat-label { color: var(--text-muted); font-size: 1rem; }
 
-  .price-card:hover {
-    border-color: var(--primary-blue);
-    box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+  /* ================= بخش ویژگی‌ها ================= */
+  .features-section { padding: 80px 5%; text-align: center; }
+  .section-title { font-size: 2rem; font-weight: 900; margin-bottom: 50px; }
+  .section-title span { color: var(--primary-blue); }
+  .features-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px; max-width: 1100px; margin: 0 auto;
+  }
+  .feature-card {
+    background: var(--card-bg); border: 1px solid rgba(0, 240, 255, 0.15);
+    border-radius: 20px; padding: 35px 25px; backdrop-filter: blur(10px);
+    transition: 0.4s; text-align: center; position: relative; overflow: hidden;
+  }
+  .feature-card:hover {
+    border-color: var(--primary-blue); box-shadow: 0 0 40px rgba(0, 240, 255, 0.15);
     transform: translateY(-10px);
   }
-
-  .price-card.popular {
-    border-color: var(--primary-blue);
-    box-shadow: 0 0 30px rgba(0, 240, 255, 0.15);
+  .feature-icon {
+    font-size: 2.5rem; margin-bottom: 20px; display: block;
+    filter: drop-shadow(0 0 15px var(--primary-blue));
   }
-
-  .popular-badge {
-    position: absolute;
-    top: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--primary-blue);
-    color: var(--bg-color);
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-weight: 900;
-    font-size: 0.8rem;
-  }
-
-  .price-card h3 {
-    font-size: 1.2rem;
-    color: var(--text-muted);
-    margin-bottom: 20px;
-  }
-
-  .price {
-    font-size: 2.5rem;
-    font-weight: 900;
-    color: var(--primary-blue);
-    margin-bottom: 20px;
-  }
-
-  .price span {
-    font-size: 1rem;
-    color: var(--text-muted);
-  }
-
-  .price-card ul {
-    list-style: none;
-    margin-bottom: 30px;
-    text-align: right;
-  }
-
-  .price-card ul li {
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    font-size: 0.9rem;
-  }
-
-  .price-card ul li::before {
-    content: '✓';
-    color: var(--primary-blue);
-    margin-left: 10px;
-    font-weight: 900;
-  }
+  .feature-card h3 { font-size: 1.2rem; color: #fff; margin-bottom: 15px; }
+  .feature-card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; }
 
   /* ================= فرم سفارش ================= */
-  .order-section {
-    padding: 80px 5%;
-    display: flex;
-    justify-content: center;
-  }
-
+  .order-section { padding: 80px 5%; display: flex; justify-content: center; }
   .order-box {
-    background: var(--card-bg);
-    border: 1px solid rgba(0, 240, 255, 0.3);
-    border-radius: 20px;
-    padding: 40px;
-    max-width: 600px;
-    width: 100%;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 40px rgba(0, 240, 255, 0.1);
+    background: var(--card-bg); border: 1px solid rgba(0, 240, 255, 0.3);
+    border-radius: 20px; padding: 40px; max-width: 600px; width: 100%;
+    backdrop-filter: blur(10px); box-shadow: 0 0 40px rgba(0, 240, 255, 0.1);
     text-align: center;
   }
-
-  .order-box p {
-    color: var(--text-muted);
-    line-height: 1.8;
-    margin-bottom: 25px;
-    font-size: 1.05rem;
-  }
-
+  .order-box p { color: var(--text-muted); line-height: 1.8; margin-bottom: 25px; font-size: 1.05rem; }
   .contact-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 18px 40px;
-    border-radius: 50px;
-    background: linear-gradient(135deg, #00f0ff, #0088cc);
-    color: var(--bg-color);
-    font-size: 1.2rem;
-    font-weight: 900;
-    text-decoration: none;
-    transition: 0.3s;
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+    display: inline-flex; align-items: center; gap: 10px; padding: 18px 40px;
+    border-radius: 50px; background: linear-gradient(135deg, #00f0ff, #00ffcc);
+    color: var(--bg-color); font-size: 1.2rem; font-weight: 900; text-decoration: none;
+    transition: 0.3s; box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
   }
-
-  .contact-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 40px rgba(0, 240, 255, 0.8);
-  }
+  .contact-btn:hover { transform: scale(1.05); box-shadow: 0 0 40px rgba(0, 240, 255, 0.8); }
 
   /* ================= فوتر ================= */
   footer {
-    text-align: center;
-    padding: 40px;
-    border-top: 1px solid rgba(0, 240, 255, 0.1);
-    color: var(--text-muted);
-    font-size: 0.9rem;
+    text-align: center; padding: 40px; border-top: 1px solid rgba(0, 240, 255, 0.1);
+    color: var(--text-muted); font-size: 0.9rem;
   }
 
   @media (max-width: 768px) {
@@ -395,11 +210,10 @@
   <!-- هدر -->
   <header>
     <div class="header-left">
-      <!-- دکمه سه نقطه سمت چپ -->
       <button class="menu-btn" onclick="openSidebar()">⋮</button>
     </div>
     <div class="logo">⚡ نئون شاپ</div>
-    <div style="width: 40px;"></div> <!-- برای تعادل -->
+    <div style="width: 40px;"></div>
   </header>
 
   <!-- منوی کناری -->
@@ -420,48 +234,47 @@
   <section class="hero" id="home">
     <h1>قدرت <span>رشد</span> در دستان توست</h1>
     <p>با نئون شاپ، در کمتر از چند دقیقه فالوور، عضو و بازدید واقعی با کیفیت برای شبکه‌های اجتماعی خودت بگیر. سریع، امن و کاملاً خودکار.</p>
-    <a href="#pricing" class="btn">شروع کن 🚀</a>
+    <a href="#order" class="btn">شروع کن 🚀</a>
   </section>
 
-  <!-- تعرفه‌ها -->
-  <section class="pricing" id="pricing">
-    <h2 class="section-title">تعرفه‌های <span>نئون</span></h2>
-    <div class="pricing-grid">
+  <!-- آمار پلتفرم -->
+  <section class="stats-section" id="stats">
+    <h2 class="section-title">آمار <span>پلتفرم</span></h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">۶</div>
+        <div class="stat-label">تعداد کاربران سایت</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ویژگی‌ها -->
+  <section class="features-section" id="features">
+    <h2 class="section-title">چرا <span>نئون شاپ</span>؟</h2>
+    <div class="features-grid">
       
-      <div class="price-card">
-        <h3>بسته شروع</h3>
-        <div class="price">۵۰,۰۰۰ <span>تومان</span></div>
-        <ul>
-          <li>۱۰۰۰ عضو واقعی</li>
-          <li>تحویل آنی</li>
-          <li>بدون ریزش تا ۷ روز</li>
-        </ul>
-        <a href="#order" class="btn" style="width: 100%; text-align: center;">انتخاب</a>
+      <div class="feature-card">
+        <span class="feature-icon">⚡</span>
+        <h3>سرعت بالا</h3>
+        <p>سفارشات شما در کمترین زمان ممکن و به صورت کاملاً خودکار پردازش و تحویل داده می‌شوند.</p>
       </div>
 
-      <div class="price-card popular">
-        <div class="popular-badge">🔥 پیشنهاد ویژه</div>
-        <h3>بسته حرفه‌ای</h3>
-        <div class="price">۲۰۰,۰۰۰ <span>تومان</span></div>
-        <ul>
-          <li>۵۰۰۰ عضو واقعی</li>
-          <li>تحویل آنی + پخش تدریجی</li>
-          <li>گارانتی ۳۰ روزه</li>
-          <li>پشتیبانی ۲۴/۷</li>
-        </ul>
-        <a href="#order" class="btn" style="width: 100%; text-align: center; background: var(--primary-blue); color: var(--bg-color);">انتخاب</a>
+      <div class="feature-card">
+        <span class="feature-icon">🛡️</span>
+        <h3>خریدهای تضمینی</h3>
+        <p>تمامی خدمات ما دارای گارانتی و ضمانت هستند. در صورت بروز هرگونه مشکل، جایگزینی انجام می‌شود.</p>
       </div>
 
-      <div class="price-card">
-        <h3>بسته پادشاهی</h3>
-        <div class="price">۳۵۰,۰۰۰ <span>تومان</span></div>
-        <ul>
-          <li>۱۰,۰۰۰ عضو واقعی</li>
-          <li>تحویل آنی + پخش تدریجی</li>
-          <li>گارانتی ۹۰ روزه</li>
-          <li>پشتیبانی VIP</li>
-        </ul>
-        <a href="#order" class="btn" style="width: 100%; text-align: center;">انتخاب</a>
+      <div class="feature-card">
+        <span class="feature-icon">🎧</span>
+        <h3>پشتیبانی ۲۴/۷</h3>
+        <p>تیم پشتیبانی ما در تمام ساعات شبانه‌روز آماده پاسخگویی به سوالات و مشکلات شماست.</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">💎</span>
+        <h3>کیفیت و قیمت</h3>
+        <p>سفارش‌های متنوع با کیفیت بالا و قیمتی کاملاً زیر بازار. بهترین انتخاب برای رشد شما.</p>
       </div>
 
     </div>
@@ -489,39 +302,25 @@
 
   <!-- اسکریپت -->
   <script>
-    // متغیر برای نگه داشتن تایمر پیام
     let toastTimer;
 
-    // باز کردن منو
     function openSidebar() {
       document.getElementById('sidebar').classList.add('active');
       document.getElementById('sidebarOverlay').classList.add('active');
     }
 
-    // بستن منو
     function closeSidebar() {
       document.getElementById('sidebar').classList.remove('active');
       document.getElementById('sidebarOverlay').classList.remove('active');
     }
 
-    // نمایش پیام "به زودی"
     function showComingSoon(title) {
       const toast = document.getElementById('toast');
       toast.textContent = `⏳ بخش «${title}» به زودی اضافه خواهد شد!`;
-      
-      // نمایش پیام
       toast.classList.add('show');
-
-      // بستن منو
       closeSidebar();
-
-      // پاک کردن تایمر قبلی اگر وجود داشته باشد
       clearTimeout(toastTimer);
-
-      // تنظیم تایمر برای مخفی کردن پیام بعد از 30 ثانیه
-      toastTimer = setTimeout(() => {
-        toast.classList.remove('show');
-      }, 30000); 
+      toastTimer = setTimeout(() => { toast.classList.remove('show'); }, 30000); 
     }
   </script>
 
