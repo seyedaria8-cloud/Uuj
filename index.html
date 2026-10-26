@@ -6,7 +6,7 @@
 <title>نئون شاپ | خدمات دیجیتال</title>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Vazirmatn', sans-serif; scroll-behavior: smooth; }
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Vazirmatn', sans-serif; scroll-behavior: smooth; cursor: none; } /* مخفی کردن موس پیش‌فرض */
 
   :root {
     --primary-blue: #00f0ff;
@@ -18,20 +18,16 @@
     --text-muted: #94a3b8;
   }
 
-  /* ================= 🟢 افکت گلیچ روی کل سایت 🟢 ================= */
   body {
     background-color: var(--bg-color); color: var(--text-color); min-height: 100vh; overflow-x: hidden;
     background-image: 
       linear-gradient(rgba(0, 240, 255, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 240, 255, 0.04) 1px, transparent 1px),
-      radial-gradient(circle at 10% 10%, rgba(0, 240, 255, 0.15) 0%, transparent 40%),
-      radial-gradient(circle at 90% 90%, rgba(255, 0, 228, 0.1) 0%, transparent 40%);
-    background-size: 40px 40px, 40px 40px, 100% 100%, 100% 100%;
+      linear-gradient(90deg, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
     background-attachment: fixed;
-    animation: globalGlitch 8s infinite; /* انیمیشن گلیچ کل صفحه */
+    animation: globalGlitch 8s infinite;
   }
 
-  /* انیمیشن گلیچ خفیف برای کل صفحه */
   @keyframes globalGlitch {
     0%, 92%, 100% { transform: translate(0, 0) skew(0deg); filter: none; }
     93% { transform: translate(-1px, 1px) skew(-0.5deg); filter: hue-rotate(90deg) contrast(1.2); }
@@ -40,6 +36,74 @@
     96% { transform: translate(-1px, 0) skew(0.3deg); filter: saturate(1.5); }
     97% { transform: translate(1px, 1px) skew(-0.3deg); filter: saturate(1.5); }
     98% { transform: translate(0, 0) skew(0deg); filter: none; }
+  }
+
+  /* ================= 🌌 پس‌زمینه کهکشانی و پارالاکس ================= */
+  #galaxy-canvas {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -2; pointer-events: none;
+  }
+  .parallax-bg {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -3; pointer-events: none;
+    background: radial-gradient(circle at 20% 30%, rgba(0, 240, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 228, 0.1) 0%, transparent 40%);
+    transition: transform 0.1s ease-out;
+  }
+
+  /* ================= 🖱️ نشانگر موس سفارشی ================= */
+  .custom-cursor {
+    width: 20px; height: 20px; border: 2px solid var(--primary-blue);
+    border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s, background 0.2s;
+    box-shadow: 0 0 15px var(--primary-blue);
+  }
+  .custom-cursor::after {
+    content: ''; position: absolute; top: 50%; left: 50%;
+    width: 4px; height: 4px; background: var(--primary-blue);
+    border-radius: 50%; transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px var(--primary-blue);
+  }
+  .custom-cursor.hovering {
+    width: 40px; height: 40px; background: rgba(0, 240, 255, 0.2);
+    border-color: var(--neon-pink); box-shadow: 0 0 25px var(--neon-pink);
+  }
+  .cursor-trail {
+    position: fixed; width: 10px; height: 10px;
+    background: var(--primary-blue); border-radius: 50%;
+    pointer-events: none; z-index: 9998;
+    box-shadow: 0 0 10px var(--primary-blue);
+    opacity: 0.6; transform: translate(-50%, -50%);
+  }
+
+  /* ================= 🟢 افکت گلیچ تیتر ================= */
+  .glitch-title {
+    position: relative;
+    font-size: 3.2rem; font-weight: 900; line-height: 1.3; margin-bottom: 20px;
+    color: #fff;
+  }
+  .glitch-title::before, .glitch-title::after {
+    content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  }
+  .glitch-title::before {
+    left: 2px; text-shadow: -2px 0 var(--neon-pink);
+    clip: rect(44px, 450px, 56px, 0); animation: glitch-anim 5s infinite linear alternate-reverse;
+  }
+  .glitch-title::after {
+    left: -2px; text-shadow: -2px 0 var(--primary-blue), 2px 2px var(--neon-pink);
+    animation: glitch-anim2 1s infinite linear alternate-reverse;
+  }
+  .glitch-title span { color: var(--primary-blue); text-shadow: 0 0 20px var(--primary-blue); }
+  
+  @keyframes glitch-anim {
+    0% { clip: rect(20px, 9999px, 85px, 0); } 20% { clip: rect(60px, 9999px, 10px, 0); }
+    40% { clip: rect(10px, 9999px, 50px, 0); } 60% { clip: rect(70px, 9999px, 90px, 0); }
+    80% { clip: rect(35px, 9999px, 20px, 0); } 100% { clip: rect(80px, 9999px, 60px, 0); }
+  }
+  @keyframes glitch-anim2 {
+    0% { clip: rect(10px, 9999px, 20px, 0); } 20% { clip: rect(40px, 9999px, 80px, 0); }
+    40% { clip: rect(80px, 9999px, 30px, 0); } 60% { clip: rect(20px, 9999px, 70px, 0); }
+    80% { clip: rect(50px, 9999px, 10px, 0); } 100% { clip: rect(30px, 9999px, 90px, 0); }
   }
 
   /* ================= هدر ================= */
@@ -106,8 +170,6 @@
 
   /* ================= هیرو ================= */
   .hero { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 140px 20px 40px; }
-  .hero h1 { font-size: 3.2rem; font-weight: 900; line-height: 1.3; margin-bottom: 20px; }
-  .hero h1 span { color: var(--primary-blue); text-shadow: 0 0 20px var(--primary-blue); }
   .hero p { font-size: 1.1rem; color: var(--text-muted); max-width: 600px; margin-bottom: 40px; line-height: 1.8; }
 
   .btn { padding: 16px 45px; border-radius: 50px; text-decoration: none; font-weight: 900; font-size: 1rem; transition: all 0.3s ease; display: inline-block; border: 1px solid var(--primary-blue); color: var(--primary-blue); background: rgba(0, 240, 255, 0.05); box-shadow: 0 0 15px rgba(0, 240, 255, 0.15); }
@@ -171,12 +233,20 @@
   .shop-header h2 { font-size: 1.8rem; color: var(--primary-blue); text-shadow: 0 0 20px rgba(0,240,255,0.4); margin-bottom: 8px; }
   .shop-header p { color: var(--text-muted); font-size: 0.9rem; }
 
+  /* ================= ✨ کارت‌های هولوگرافیک ✨ ================= */
   .shop-card { 
     background: var(--card-bg); border: 1px solid rgba(0, 240, 255, 0.2); border-radius: 20px; 
     padding: 30px 20px; width: 100%; max-width: 500px; backdrop-filter: blur(15px); 
     text-align: center; margin-bottom: 25px; position: relative; transition: all 0.3s ease;
+    background-image: 
+      radial-gradient(circle at 100% 0%, rgba(0, 240, 255, 0.15), transparent 50%),
+      radial-gradient(circle at 0% 100%, rgba(255, 0, 228, 0.15), transparent 50%);
   }
-  .shop-card:hover { border-color: var(--primary-blue); box-shadow: 0 0 30px rgba(0, 240, 255, 0.15); transform: translateY(-5px); }
+  .shop-card:hover { 
+    border-color: transparent; 
+    box-shadow: 0 0 40px rgba(0, 240, 255, 0.2), 0 0 80px rgba(255, 0, 228, 0.1); 
+    transform: translateY(-5px);
+  }
   
   .stock-badge { position: absolute; top: 15px; left: 15px; background: rgba(0, 240, 255, 0.15); border: 1px solid var(--primary-blue); color: var(--primary-blue); font-size: 0.75rem; font-weight: 700; padding: 5px 12px; border-radius: 30px; display: flex; align-items: center; gap: 5px; }
 
@@ -228,15 +298,24 @@
   }
 
   @media (max-width: 768px) { 
-    .hero h1 { font-size: 2rem; } 
+    .glitch-title { font-size: 2rem; } 
     header { width: 95%; left: 2.5%; padding: 15px 20px; top: 10px; }
     .sidebar { width: 85%; right: -100%; }
     .shop-card, .support-card { padding: 20px 15px; }
     .id-text { font-size: 1.4rem; }
+    .custom-cursor, .cursor-trail { display: none; } /* غیرفعال کردن موس سفارشی در موبایل */
+    * { cursor: auto; }
   }
 </style>
 </head>
 <body>
+
+  <!-- پس‌زمینه‌ها -->
+  <div class="parallax-bg" id="parallaxBg"></div>
+  <canvas id="galaxy-canvas"></canvas>
+
+  <!-- نشانگر موس سفارشی -->
+  <div class="custom-cursor" id="cursor"></div>
 
   <!-- هدر -->
   <header>
@@ -272,7 +351,6 @@
       <p>پکیج‌های ویژه و مدرن برای رشد شما</p>
     </div>
 
-    <!-- بسته اول -->
     <div class="shop-card">
       <div class="icon-circle">📢</div>
       <h3>تبلیغات (پیوی)</h3>
@@ -284,7 +362,6 @@
       <a href="https://rubika.ir/Raavo_87" class="buy-btn" style="display: block; text-decoration: none;">💬 خرید پکیج پیوی</a>
     </div>
 
-    <!-- بسته دوم -->
     <div class="shop-card">
       <div class="icon-circle">👥</div>
       <h3>تبلیغات (گروه)</h3>
@@ -296,15 +373,12 @@
       <a href="https://rubika.ir/Raavo_87" class="buy-btn" style="display: block; text-decoration: none;">💬 خرید پکیج گروه</a>
     </div>
 
-    <!-- بسته سوم -->
     <div class="shop-card">
       <div class="stock-badge">✨ ۴ تا موجود است</div>
-      
       <div class="discount-timer">
         <span class="discount-label">۳۰٪ تخفیف ویژه</span>
         <span id="timer">⏱️ 05:00:00</span>
       </div>
-      
       <div class="icon-circle">📺</div>
       <h3>کانال آماده (روبیکا)</h3>
       <div class="price-box"><span>۳۰,۰۰۰</span> تومان</div>
@@ -334,9 +408,11 @@
     <button class="back-btn" onclick="closeSupport()">← بازگشت</button>
   </div>
 
-  <!-- هیرو -->
+  <!-- هیرو با افکت گلیچ -->
   <section class="hero" id="home">
-    <h1>قدرت <span>رشد</span> در دستان توست</h1>
+    <h1 class="glitch-title" data-text="قدرت رشد در دستان توست">
+      قدرت <span>رشد</span> در دستان توست
+    </h1>
     <p>با نئون شاپ، در کمتر از چند دقیقه فالوور، عضو و بازدید واقعی با کیفیت برای شبکه‌های اجتماعی خودت بگیر. سریع، امن و کاملاً خودکار.</p>
     <a href="#order" class="btn">شروع کن 🚀</a>
   </section>
@@ -393,6 +469,114 @@
 
   <!-- اسکریپت -->
   <script>
+    // ================= 🖱️ نشانگر موس سفارشی و دنباله =================
+    const cursor = document.getElementById('cursor');
+    const trails = [];
+    let mouseX = 0, mouseY = 0;
+    let trailIndex = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursor.style.left = mouseX + 'px';
+      cursor.style.top = mouseY + 'px';
+    });
+
+    // ساخت دنباله‌ها
+    for(let i = 0; i < 5; i++) {
+      const trail = document.createElement('div');
+      trail.className = 'cursor-trail';
+      document.body.appendChild(trail);
+      trails.push(trail);
+    }
+
+    // انیمیشن دنباله
+    function animateTrail() {
+      let x = mouseX, y = mouseY;
+      trails.forEach((trail, index) => {
+        setTimeout(() => {
+          trail.style.left = x + 'px';
+          trail.style.top = y + 'px';
+        }, index * 50);
+      });
+      requestAnimationFrame(animateTrail);
+    }
+    animateTrail();
+
+    // افکت هاور موس روی دکمه‌ها
+    document.querySelectorAll('a, button, .sidebar-item').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+    });
+
+
+    // ================= 🌌 پس‌زمینه ستاره‌های کهکشانی =================
+    const canvas = document.getElementById('galaxy-canvas');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    let width, height;
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      generateStars();
+    }
+
+    function generateStars() {
+      stars = [];
+      const starCount = Math.floor(width * height / 8000);
+      for (let i = 0; i < starCount; i++) {
+        stars.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          z: Math.random() * 3 + 0.5, // عمق برای افکت پارالاکس
+          size: Math.random() * 1.5 + 0.5,
+          opacity: Math.random()
+        });
+      }
+    }
+
+    let offsetX = 0, offsetY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      offsetX = (e.clientX - width / 2) / 50;
+      offsetY = (e.clientY - height / 2) / 50;
+    });
+
+    function animateStars() {
+      ctx.clearRect(0, 0, width, height);
+      stars.forEach(star => {
+        // حرکت پارالاکس با موس
+        const x = star.x + offsetX * star.z * 5;
+        const y = star.y + offsetY * star.z * 5;
+
+        ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
+        ctx.beginPath();
+        ctx.arc(x, y, star.size, 0, Math.PI * 2);
+        ctx.fill();
+
+        // چشمک زدن
+        star.opacity += (Math.random() - 0.5) * 0.1;
+        if (star.opacity < 0.1) star.opacity = 0.1;
+        if (star.opacity > 1) star.opacity = 1;
+      });
+      requestAnimationFrame(animateStars);
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    animateStars();
+
+    // ================= 🌠 افکت پارالاکس پس‌زمینه =================
+    const parallaxBg = document.getElementById('parallaxBg');
+    document.addEventListener('mousemove', (e) => {
+      const x = (window.innerWidth / 2 - e.clientX) / 30;
+      const y = (window.innerHeight / 2 - e.clientY) / 30;
+      parallaxBg.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+
+    // ================= بقیه اسکریپت‌ها =================
     let toastTimer;
 
     function openSidebar() { document.getElementById('sidebar').classList.add('active'); document.getElementById('sidebarOverlay').classList.add('active'); }
@@ -483,4 +667,4 @@
     scheduleNextUserUpdate();
   </script>
 </body>
-       </html>
+     </html>
