@@ -111,6 +111,105 @@
   .stat-number { font-size: 3rem; font-weight: 900; color: var(--primary-blue); text-shadow: 0 0 20px rgba(0, 240, 255, 0.4); direction: ltr; margin-bottom: 8px; }
   .stat-label { color: var(--text-muted); font-size: 0.95rem; }
 
+  /* ================= 🆕 بخش کارت ویزیت مدیر ================= */
+  .manager-section { padding: 40px 5%; display: flex; justify-content: center; }
+  .manager-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    border-radius: 25px;
+    padding: 40px 30px;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    backdrop-filter: blur(15px);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.1);
+  }
+  .manager-card::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--primary-blue), var(--neon-pink), transparent);
+  }
+  .manager-card:hover {
+    box-shadow: 0 0 50px rgba(0, 240, 255, 0.2);
+    transform: translateY(-5px);
+  }
+
+  .manager-avatar {
+    width: 100px; height: 100px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-blue), var(--neon-pink));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem; font-weight: 900; color: #000;
+    margin: 0 auto 20px;
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+    position: relative;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+  }
+  .manager-avatar::after {
+    content: '👑'; position: absolute; top: -10px; right: -10px;
+    font-size: 1.5rem; filter: drop-shadow(0 0 5px gold);
+  }
+  
+  .manager-name { font-size: 1.5rem; font-weight: 900; color: #fff; margin-bottom: 5px; }
+  .manager-title { font-size: 0.9rem; color: var(--primary-blue); margin-bottom: 20px; font-weight: 700; }
+  .manager-desc { font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 25px; }
+  
+  .manager-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 30px; border-radius: 50px;
+    background: rgba(0, 240, 255, 0.1);
+    border: 1px solid var(--primary-blue);
+    color: var(--primary-blue);
+    font-size: 1rem; font-weight: 900; cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .manager-btn:hover {
+    background: var(--primary-blue); color: #000;
+    box-shadow: 0 0 25px var(--primary-blue);
+    transform: scale(1.05);
+  }
+
+  /* ================= مودال پیام مدیر ================= */
+  .message-modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(3, 6, 16, 0.95); z-index: 3000;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; visibility: hidden; transition: all 0.4s ease; backdrop-filter: blur(15px);
+    padding: 20px;
+  }
+  .message-modal.active { opacity: 1; visibility: visible; }
+
+  .message-box {
+    background: var(--card-bg); border: 1px solid rgba(0, 240, 255, 0.3);
+    border-radius: 25px; padding: 40px 30px; max-width: 450px; width: 100%;
+    text-align: center; position: relative;
+    box-shadow: 0 0 50px rgba(0, 240, 255, 0.2);
+    transform: scale(0.9); transition: transform 0.4s ease;
+  }
+  .message-modal.active .message-box { transform: scale(1); }
+
+  .message-box::before {
+    content: ''; position: absolute; top: -1px; right: 15%; width: 70%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary-blue), var(--neon-pink), transparent);
+  }
+
+  .message-box h3 {
+    font-size: 1.4rem; color: var(--primary-blue);
+    text-shadow: 0 0 15px rgba(0,240,255,0.5); margin-bottom: 20px;
+  }
+  .message-box p {
+    font-size: 1rem; color: var(--text-color); line-height: 2;
+    background: rgba(255,255,255,0.03); padding: 20px; border-radius: 15px;
+    margin-bottom: 25px;
+  }
+  .message-box .close-btn {
+    background: rgba(0, 240, 255, 0.1); border: 1px solid var(--primary-blue);
+    color: var(--primary-blue); padding: 10px 30px; border-radius: 50px;
+    font-weight: 700; cursor: pointer; transition: all 0.3s ease;
+  }
+  .message-box .close-btn:hover { background: var(--primary-blue); color: #000; }
+
   /* ================= بخش ویژگی‌ها ================= */
   .features-section { padding: 60px 5%; text-align: center; }
   .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; max-width: 1100px; margin: 0 auto; }
@@ -227,6 +326,8 @@
     .sidebar { width: 85%; right: -100%; }
     .shop-card, .support-card, .news-card { padding: 20px 15px; }
     .id-text { font-size: 1.4rem; }
+    .manager-card { padding: 30px 20px; }
+    .manager-avatar { width: 80px; height: 80px; font-size: 2.5rem; }
   }
 </style>
 </head>
@@ -256,6 +357,19 @@
   <!-- پیام سبز رنگ -->
   <div class="toast" id="toast">به زودی اضافه خواهد شد!</div>
 
+  <!-- ================= مودال پیام مدیر ================= -->
+  <div class="message-modal" id="messageModal">
+    <div class="message-box">
+      <h3>پیام از طرف مدیر</h3>
+      <p>
+        سلام رفیق! 👋<br><br>
+        من مدیر نئون شاپ هستم. خوشحالم که به سایت ما سر زدی. اگه هر سوال، پیشنهاد یا انتقادی داشتی، حتماً بهم پیام بده. ما همیشه در خدمت شماییم! ❤️<br><br>
+        <span style="color: var(--primary-blue); font-weight: 900;">@Raavo_87</span>
+      </p>
+      <button class="close-btn" onclick="closeMessage()">بستن</button>
+    </div>
+  </div>
+
   <!-- ================= صفحه فروشگاه (Modal) ================= -->
   <div class="shop-modal" id="shopModal">
     <a href="#" class="top-back-btn" onclick="closeShop()">← بازگشت به صفحه اصلی</a>
@@ -266,7 +380,6 @@
       <p>پکیج‌های ویژه و مدرن برای رشد شما</p>
     </div>
 
-    <!-- بسته اول: تبلیغات پیوی -->
     <div class="shop-card">
       <div class="icon-circle">📢</div>
       <h3>تبلیغات (پیوی)</h3>
@@ -278,7 +391,6 @@
       <a href="https://rubika.ir/Raavo_87" class="buy-btn" style="display: block; text-decoration: none;">💬 خرید پکیج پیوی</a>
     </div>
 
-    <!-- بسته دوم: تبلیغات گروه -->
     <div class="shop-card">
       <div class="icon-circle">👥</div>
       <h3>تبلیغات (گروه)</h3>
@@ -290,7 +402,6 @@
       <a href="https://rubika.ir/Raavo_87" class="buy-btn" style="display: block; text-decoration: none;">💬 خرید پکیج گروه</a>
     </div>
 
-    <!-- بسته سوم: کانال آماده -->
     <div class="shop-card">
       <div class="stock-badge">✨ ۴ تا موجود است</div>
       <div class="discount-timer">
@@ -308,7 +419,6 @@
       <a href="https://rubika.ir/Raavo_87" class="buy-btn" style="display: block; text-decoration: none;">💬 خرید کانال آماده</a>
     </div>
 
-    <!-- 🆕 بسته چهارم: سکه روبیستا -->
     <div class="shop-card">
       <div class="icon-circle">🪙</div>
       <h3>سکه روبیستا</h3>
@@ -321,7 +431,6 @@
       <a href="https://rubika.ir/Raavo_87" class="buy-btn" style="display: block; text-decoration: none;">💬 خرید سکه روبیستا</a>
     </div>
 
-    <!-- 🆕 بسته پنجم: سکه عضو بگیر روبیکا (کانال) -->
     <div class="shop-card">
       <div class="icon-circle">📈</div>
       <h3>سکه عضو بگیر روبیکا (کانال)</h3>
@@ -334,7 +443,6 @@
       <a href="https://rubika.ir/Raavo_87" class="buy-btn" style="display: block; text-decoration: none;">💬 خرید سکه عضو بگیر</a>
     </div>
 
-    <!-- 🆕 بسته ششم: گروه آماده (روبیکا) -->
     <div class="shop-card">
       <div class="icon-circle">👨‍👩‍👧‍👦</div>
       <h3>گروه آماده (روبیکا)</h3>
@@ -391,6 +499,17 @@
         <div class="stat-number" id="user-count">۶</div>
         <div class="stat-label">تعداد کاربران سایت</div>
       </div>
+    </div>
+  </section>
+
+  <!-- 🆕 کارت ویزیت مدیر -->
+  <section class="manager-section">
+    <div class="manager-card">
+      <div class="manager-avatar">R</div>
+      <div class="manager-name">راوو</div>
+      <div class="manager-title">مدیر و بنیان‌گذار نئون شاپ</div>
+      <p class="manager-desc">با افتخار در خدمت شما هستم. هدف من ارائه بهترین خدمات دیجیتال با کیفیت و قیمت منصفانه به شماست.</p>
+      <button class="manager-btn" onclick="openMessage()">👋 سلام مدیر</button>
     </div>
   </section>
 
@@ -455,9 +574,12 @@
     function openSupport() { closeSidebar(); document.getElementById('supportModal').classList.add('active'); }
     function closeSupport() { document.getElementById('supportModal').classList.remove('active'); }
 
-    // توابع صفحه اخبار
     function openNews() { closeSidebar(); document.getElementById('newsModal').classList.add('active'); }
     function closeNews() { document.getElementById('newsModal').classList.remove('active'); }
+
+    // 🆕 توابع کارت ویزیت مدیر
+    function openMessage() { document.getElementById('messageModal').classList.add('active'); }
+    function closeMessage() { document.getElementById('messageModal').classList.remove('active'); }
 
     function copyID() {
       const id = "@Raavo_87";
@@ -529,4 +651,4 @@
     scheduleNextUserUpdate();
   </script>
 </body>
- </html>
+       </html>
