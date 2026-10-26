@@ -18,6 +18,7 @@
     --text-muted: #94a3b8;
   }
 
+  /* ================= 🟢 افکت گلیچ روی کل سایت 🟢 ================= */
   body {
     background-color: var(--bg-color); color: var(--text-color); min-height: 100vh; overflow-x: hidden;
     background-image: 
@@ -27,6 +28,18 @@
       radial-gradient(circle at 90% 90%, rgba(255, 0, 228, 0.1) 0%, transparent 40%);
     background-size: 40px 40px, 40px 40px, 100% 100%, 100% 100%;
     background-attachment: fixed;
+    animation: globalGlitch 8s infinite; /* انیمیشن گلیچ کل صفحه */
+  }
+
+  /* انیمیشن گلیچ خفیف برای کل صفحه */
+  @keyframes globalGlitch {
+    0%, 92%, 100% { transform: translate(0, 0) skew(0deg); filter: none; }
+    93% { transform: translate(-1px, 1px) skew(-0.5deg); filter: hue-rotate(90deg) contrast(1.2); }
+    94% { transform: translate(1px, -1px) skew(0.5deg); filter: hue-rotate(-90deg) contrast(1.2); }
+    95% { transform: translate(0, 0) skew(0deg); filter: none; }
+    96% { transform: translate(-1px, 0) skew(0.3deg); filter: saturate(1.5); }
+    97% { transform: translate(1px, 1px) skew(-0.3deg); filter: saturate(1.5); }
+    98% { transform: translate(0, 0) skew(0deg); filter: none; }
   }
 
   /* ================= هدر ================= */
@@ -91,64 +104,10 @@
   }
   .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
-  /* ================= هیرو و افکت هکری ================= */
+  /* ================= هیرو ================= */
   .hero { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 140px 20px 40px; }
-  
-  /* 🟢 افکت گلیچ روی تیتر اصلی 🟢 */
-  .glitch-text {
-    font-size: 3.2rem; font-weight: 900; line-height: 1.3; margin-bottom: 20px;
-    position: relative;
-    color: #fff;
-    cursor: pointer;
-  }
-  .glitch-text::before, .glitch-text::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  .glitch-text::before {
-    left: 2px;
-    text-shadow: -2px 0 var(--neon-pink);
-    clip: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim 5s infinite linear alternate-reverse;
-  }
-  .glitch-text::after {
-    left: -2px;
-    text-shadow: -2px 0 var(--primary-blue), 2px 2px var(--neon-pink);
-    animation: glitch-anim2 1s infinite linear alternate-reverse;
-  }
-  
-  .glitch-text span { color: var(--primary-blue); text-shadow: 0 0 20px var(--primary-blue); }
-
-  /* کی‌فریم‌های انیمیشن گلیچ */
-  @keyframes glitch-anim {
-    0% { clip: rect(20px, 9999px, 85px, 0); }
-    20% { clip: rect(60px, 9999px, 10px, 0); }
-    40% { clip: rect(10px, 9999px, 50px, 0); }
-    60% { clip: rect(70px, 9999px, 90px, 0); }
-    80% { clip: rect(35px, 9999px, 20px, 0); }
-    100% { clip: rect(80px, 9999px, 60px, 0); }
-  }
-  @keyframes glitch-anim2 {
-    0% { clip: rect(10px, 9999px, 20px, 0); }
-    20% { clip: rect(40px, 9999px, 80px, 0); }
-    40% { clip: rect(80px, 9999px, 30px, 0); }
-    60% { clip: rect(20px, 9999px, 70px, 0); }
-    80% { clip: rect(50px, 9999px, 10px, 0); }
-    100% { clip: rect(30px, 9999px, 90px, 0); }
-  }
-
-  /* افکت گلیچ فقط با هاور روی تیتر */
-  .glitch-text:hover::before {
-    animation: glitch-anim 0.3s infinite linear alternate-reverse;
-  }
-  .glitch-text:hover::after {
-    animation: glitch-anim2 0.3s infinite linear alternate-reverse;
-  }
-
+  .hero h1 { font-size: 3.2rem; font-weight: 900; line-height: 1.3; margin-bottom: 20px; }
+  .hero h1 span { color: var(--primary-blue); text-shadow: 0 0 20px var(--primary-blue); }
   .hero p { font-size: 1.1rem; color: var(--text-muted); max-width: 600px; margin-bottom: 40px; line-height: 1.8; }
 
   .btn { padding: 16px 45px; border-radius: 50px; text-decoration: none; font-weight: 900; font-size: 1rem; transition: all 0.3s ease; display: inline-block; border: 1px solid var(--primary-blue); color: var(--primary-blue); background: rgba(0, 240, 255, 0.05); box-shadow: 0 0 15px rgba(0, 240, 255, 0.15); }
@@ -212,25 +171,12 @@
   .shop-header h2 { font-size: 1.8rem; color: var(--primary-blue); text-shadow: 0 0 20px rgba(0,240,255,0.4); margin-bottom: 8px; }
   .shop-header p { color: var(--text-muted); font-size: 0.9rem; }
 
-  /* کارت‌های فروشگاه حالا ساده و تمیز هستن (هولوگرافیک حذف شد) */
   .shop-card { 
-    background: var(--card-bg); 
-    border: 1px solid rgba(0, 240, 255, 0.2); 
-    border-radius: 20px; 
-    padding: 30px 20px; 
-    width: 100%; 
-    max-width: 500px; 
-    backdrop-filter: blur(15px); 
-    text-align: center; 
-    margin-bottom: 25px; 
-    position: relative; 
-    transition: all 0.3s ease;
+    background: var(--card-bg); border: 1px solid rgba(0, 240, 255, 0.2); border-radius: 20px; 
+    padding: 30px 20px; width: 100%; max-width: 500px; backdrop-filter: blur(15px); 
+    text-align: center; margin-bottom: 25px; position: relative; transition: all 0.3s ease;
   }
-  .shop-card:hover { 
-    border-color: var(--primary-blue); 
-    box-shadow: 0 0 30px rgba(0, 240, 255, 0.15); 
-    transform: translateY(-5px);
-  }
+  .shop-card:hover { border-color: var(--primary-blue); box-shadow: 0 0 30px rgba(0, 240, 255, 0.15); transform: translateY(-5px); }
   
   .stock-badge { position: absolute; top: 15px; left: 15px; background: rgba(0, 240, 255, 0.15); border: 1px solid var(--primary-blue); color: var(--primary-blue); font-size: 0.75rem; font-weight: 700; padding: 5px 12px; border-radius: 30px; display: flex; align-items: center; gap: 5px; }
 
@@ -282,7 +228,7 @@
   }
 
   @media (max-width: 768px) { 
-    .glitch-text { font-size: 2rem; } 
+    .hero h1 { font-size: 2rem; } 
     header { width: 95%; left: 2.5%; padding: 15px 20px; top: 10px; }
     .sidebar { width: 85%; right: -100%; }
     .shop-card, .support-card { padding: 20px 15px; }
@@ -388,11 +334,9 @@
     <button class="back-btn" onclick="closeSupport()">← بازگشت</button>
   </div>
 
-  <!-- هیرو با افکت هکری -->
+  <!-- هیرو -->
   <section class="hero" id="home">
-    <div class="glitch-text" data-text="قدرت رشد در دستان توست">
-      قدرت <span>رشد</span> در دستان توست
-    </div>
+    <h1>قدرت <span>رشد</span> در دستان توست</h1>
     <p>با نئون شاپ، در کمتر از چند دقیقه فالوور، عضو و بازدید واقعی با کیفیت برای شبکه‌های اجتماعی خودت بگیر. سریع، امن و کاملاً خودکار.</p>
     <a href="#order" class="btn">شروع کن 🚀</a>
   </section>
