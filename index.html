@@ -153,20 +153,20 @@
   }
   .top-back-btn:hover { background: var(--primary-blue); color: #000; box-shadow: 0 0 20px var(--primary-blue); }
 
-  /* 🔼 دکمه‌های شناور اسکرول عمودی (ثابت روی صفحه) 🔽 */
-  .scroll-nav {
-    position: fixed; bottom: 30px; right: 30px; z-index: 3050;
-    display: flex; flex-direction: column; gap: 10px;
+  /* 🔼 دکمه‌های اسکرول همراه با محتوا (نه ثابت) 🔽 */
+  .scroll-nav-container {
+    position: absolute; top: 150px; right: 15px; z-index: 50;
+    display: flex; flex-direction: column; gap: 8px;
   }
   .scroll-btn {
-    width: 45px; height: 45px; border-radius: 50%;
+    width: 40px; height: 40px; border-radius: 50%;
     background: rgba(10, 20, 35, 0.9); border: 1px solid var(--primary-blue);
-    color: var(--primary-blue); font-size: 1.2rem; font-weight: 900;
+    color: var(--primary-blue); font-size: 1rem; font-weight: 900;
     display: flex; align-items: center; justify-content: center;
     cursor: pointer; transition: all 0.3s ease;
-    box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
   }
-  .scroll-btn:hover { background: var(--primary-blue); color: #000; box-shadow: 0 0 25px var(--primary-blue); }
+  .scroll-btn:hover { background: var(--primary-blue); color: #000; box-shadow: 0 0 20px var(--primary-blue); }
   .scroll-btn:active { transform: scale(0.9); }
 
   .shop-header { text-align: center; margin-bottom: 25px; margin-top: 30px; }
@@ -232,8 +232,8 @@
     .sidebar { width: 85%; right: -100%; }
     .shop-card, .support-card { padding: 20px 15px; }
     .id-text { font-size: 1.4rem; }
-    .scroll-nav { bottom: 20px; right: 20px; }
-    .scroll-btn { width: 40px; height: 40px; font-size: 1rem; }
+    .scroll-nav-container { top: 130px; right: 10px; }
+    .scroll-btn { width: 35px; height: 35px; font-size: 0.9rem; }
   }
 </style>
 </head>
@@ -267,8 +267,8 @@
   <div class="shop-modal" id="shopModal">
     <a href="#" class="top-back-btn" onclick="closeShop()">← بازگشت به صفحه اصلی</a>
     
-    <!-- دکمه‌های شناور بالا و پایین -->
-    <div class="scroll-nav">
+    <!-- 🟢 دکمه‌های اسکرول همراه با محتوا (نه ثابت) 🟢 -->
+    <div class="scroll-nav-container">
       <button class="scroll-btn" onclick="scrollToFirst()">⬆</button>
       <button class="scroll-btn" onclick="scrollToLast()">⬇</button>
     </div>
@@ -439,8 +439,6 @@
     let timerInterval;
 
     function startRandomTimer() {
-      // تولید یک عدد تصادفی بین 1 تا 11 ساعت
-      // به جای استفاده از ساعت رند، از دقیقه و ثانیه تصادفی هم استفاده می‌کنیم
       const randomHours = Math.floor(Math.random() * 11) + 1; 
       const randomMinutes = Math.floor(Math.random() * 60);
       const randomSeconds = Math.floor(Math.random() * 60);
