@@ -144,6 +144,12 @@
   .shop-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(3, 6, 16, 0.98); z-index: 3000; display: flex; flex-direction: column; align-items: center; padding: 70px 20px 40px; overflow-y: auto; opacity: 0; visibility: hidden; transition: all 0.4s ease; backdrop-filter: blur(15px); }
   .shop-modal.active { opacity: 1; visibility: visible; }
   
+  /* 🔑 کانتینر داخلی فروشگاه برای نگهداری دکمه‌ها همراه با محتوا 🔑 */
+  .shop-content-wrapper {
+    position: relative; width: 100%; max-width: 550px;
+    display: flex; flex-direction: column; align-items: center;
+  }
+
   .top-back-btn {
     position: absolute; top: 20px; left: 20px; background: rgba(0, 240, 255, 0.1);
     border: 1px solid var(--primary-blue); color: var(--primary-blue);
@@ -153,12 +159,10 @@
   }
   .top-back-btn:hover { background: var(--primary-blue); color: #000; box-shadow: 0 0 20px var(--primary-blue); }
 
-  /* 🔼 دکمه‌های اسکرول همراه با محتوا (نه ثابت) 🔽 */
+  /* 🔼 دکمه‌های اسکرول همراه با محتوا 🔽 */
   .scroll-nav-container {
-    position: absolute; top: 150px; right: 15px; z-index: 50;
+    position: absolute; top: 200px; right: -10px; z-index: 50;
     display: flex; flex-direction: column; gap: 8px;
-    /* این خط مهم‌ترین بخشه: با اسکرول محتوا، این کانتینر هم حرکت می‌کنه */
-    /* چون داخل shop-modal قرار داره و shop-modal اسکرول می‌شه */
   }
   .scroll-btn {
     width: 40px; height: 40px; border-radius: 50%;
@@ -234,7 +238,7 @@
     .sidebar { width: 85%; right: -100%; }
     .shop-card, .support-card { padding: 20px 15px; }
     .id-text { font-size: 1.4rem; }
-    .scroll-nav-container { top: 130px; right: 10px; }
+    .scroll-nav-container { top: 150px; right: 0px; }
     .scroll-btn { width: 35px; height: 35px; font-size: 0.9rem; }
   }
 </style>
@@ -269,64 +273,67 @@
   <div class="shop-modal" id="shopModal">
     <a href="#" class="top-back-btn" onclick="closeShop()">← بازگشت به صفحه اصلی</a>
     
-    <!-- 🟢 دکمه‌های اسکرول همراه با محتوا (نه ثابت) 🟢 -->
-    <!-- با قرار دادن position: absolute و left: 10px، این کانتینر در بالای محتوا قرار می‌گیره -->
-    <div class="scroll-nav-container">
-      <button class="scroll-btn" onclick="scrollToFirst()">⬆</button>
-      <button class="scroll-btn" onclick="scrollToLast()">⬇</button>
-    </div>
-
-    <div class="shop-header">
-      <div class="icon-box">🛍️</div>
-      <h2>فروشگاه نئون شاپ</h2>
-      <p>پکیج‌های ویژه و مدرن برای رشد شما</p>
-    </div>
-
-    <!-- بسته اول -->
-    <div class="shop-card" id="first-package">
-      <div class="icon-circle">📢</div>
-      <h3>تبلیغات (پیوی)</h3>
-      <div class="price-box"><span>۱۰۰,۰۰۰</span> تومان</div>
-      <ul class="feature-list">
-        <li>ارسال پیام تبلیغاتی شما به پیوی <span class="highlight-number">۸۳۴,۷۹۸</span> نفر در روبیکا</li>
-        <li>تحویل فوری و پشتیبانی سریع</li>
-      </ul>
-      <a href="https://rubika.ir/Raavo_87" class="buy-btn" style="display: block; text-decoration: none;">💬 خرید پکیج پیوی</a>
-    </div>
-
-    <!-- بسته دوم -->
-    <div class="shop-card">
-      <div class="icon-circle">👥</div>
-      <h3>تبلیغات (گروه)</h3>
-      <div class="price-box"><span>۵۰۰,۰۰۰</span> تومان</div>
-      <ul class="feature-list">
-        <li>ارسال پیام تبلیغاتی شما در <span class="highlight-number">۱۵۴,۸۲۱</span> گروه روبیکا</li>
-        <li>تحویل فوری و پشتیبانی سریع</li>
-      </ul>
-      <a href="https://rubika.ir/Raavo_87" class="buy-btn" style="display: block; text-decoration: none;">💬 خرید پکیج گروه</a>
-    </div>
-
-    <!-- بسته سوم -->
-    <div class="shop-card" id="last-package">
-      <div class="stock-badge">✨ ۴ تا موجود است</div>
+    <!-- 🟢 کانتینر داخلی: همه چیز (دکمه‌ها + کارت‌ها) داخل این هستن 🟢 -->
+    <div class="shop-content-wrapper">
       
-      <div class="discount-timer">
-        <span class="discount-label">۳۰٪ تخفیف ویژه</span>
-        <span id="timer">⏱️ 05:00:00</span>
+      <!-- دکمه‌های اسکرول همراه با محتوا -->
+      <div class="scroll-nav-container">
+        <button class="scroll-btn" onclick="scrollToFirst()">⬆</button>
+        <button class="scroll-btn" onclick="scrollToLast()">⬇</button>
       </div>
-      
-      <div class="icon-circle">📺</div>
-      <h3>کانال آماده (روبیکا)</h3>
-      <div class="price-box"><span>۳۰,۰۰۰</span> تومان</div>
-      <ul class="feature-list">
-        <li>تعداد اعضا: ۱,۰۰۰ نفر</li>
-        <li>تضمین به مدت یک ماه که زیر ۱,۰۰۰ نفر تعداد اعضا نمی‌شود</li>
-        <li>کانال آماده با اعضای واقعی و کیفیت بالا برای شروع سریع</li>
-      </ul>
-      <a href="https://rubika.ir/Raavo_87" class="buy-btn" style="display: block; text-decoration: none;">💬 خرید کانال آماده</a>
-    </div>
 
-    <button class="back-btn" onclick="closeShop()">← بازگشت</button>
+      <div class="shop-header">
+        <div class="icon-box">🛍️</div>
+        <h2>فروشگاه نئون شاپ</h2>
+        <p>پکیج‌های ویژه و مدرن برای رشد شما</p>
+      </div>
+
+      <!-- بسته اول -->
+      <div class="shop-card" id="first-package">
+        <div class="icon-circle">📢</div>
+        <h3>تبلیغات (پیوی)</h3>
+        <div class="price-box"><span>۱۰۰,۰۰۰</span> تومان</div>
+        <ul class="feature-list">
+          <li>ارسال پیام تبلیغاتی شما به پیوی <span class="highlight-number">۸۳۴,۷۹۸</span> نفر در روبیکا</li>
+          <li>تحویل فوری و پشتیبانی سریع</li>
+        </ul>
+        <a href="https://rubika.ir/Raavo_87" class="buy-btn" style="display: block; text-decoration: none;">💬 خرید پکیج پیوی</a>
+      </div>
+
+      <!-- بسته دوم -->
+      <div class="shop-card">
+        <div class="icon-circle">👥</div>
+        <h3>تبلیغات (گروه)</h3>
+        <div class="price-box"><span>۵۰۰,۰۰۰</span> تومان</div>
+        <ul class="feature-list">
+          <li>ارسال پیام تبلیغاتی شما در <span class="highlight-number">۱۵۴,۸۲۱</span> گروه روبیکا</li>
+          <li>تحویل فوری و پشتیبانی سریع</li>
+        </ul>
+        <a href="https://rubika.ir/Raavo_87" class="buy-btn" style="display: block; text-decoration: none;">💬 خرید پکیج گروه</a>
+      </div>
+
+      <!-- بسته سوم -->
+      <div class="shop-card" id="last-package">
+        <div class="stock-badge">✨ ۴ تا موجود است</div>
+        
+        <div class="discount-timer">
+          <span class="discount-label">۳۰٪ تخفیف ویژه</span>
+          <span id="timer">⏱️ 05:00:00</span>
+        </div>
+        
+        <div class="icon-circle">📺</div>
+        <h3>کانال آماده (روبیکا)</h3>
+        <div class="price-box"><span>۳۰,۰۰۰</span> تومان</div>
+        <ul class="feature-list">
+          <li>تعداد اعضا: ۱,۰۰۰ نفر</li>
+          <li>تضمین به مدت یک ماه که زیر ۱,۰۰۰ نفر تعداد اعضا نمی‌شود</li>
+          <li>کانال آماده با اعضای واقعی و کیفیت بالا برای شروع سریع</li>
+        </ul>
+        <a href="https://rubika.ir/Raavo_87" class="buy-btn" style="display: block; text-decoration: none;">💬 خرید کانال آماده</a>
+      </div>
+
+      <button class="back-btn" onclick="closeShop()">← بازگشت</button>
+    </div>
   </div>
 
   <!-- ================= صفحه پشتیبانی (Modal) ================= -->
@@ -421,7 +428,6 @@
     function openShop() { 
         closeSidebar(); 
         document.getElementById('shopModal').classList.add('active'); 
-        // این خط باعث میشه موقع باز کردن فروشگاه، اسکرول برگرده به بالا
         document.getElementById('shopModal').scrollTop = 0;
     }
     function closeShop() { document.getElementById('shopModal').classList.remove('active'); }
