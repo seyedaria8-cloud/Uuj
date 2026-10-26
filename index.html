@@ -157,6 +157,8 @@
   .scroll-nav-container {
     position: absolute; top: 150px; right: 15px; z-index: 50;
     display: flex; flex-direction: column; gap: 8px;
+    /* این خط مهم‌ترین بخشه: با اسکرول محتوا، این کانتینر هم حرکت می‌کنه */
+    /* چون داخل shop-modal قرار داره و shop-modal اسکرول می‌شه */
   }
   .scroll-btn {
     width: 40px; height: 40px; border-radius: 50%;
@@ -268,6 +270,7 @@
     <a href="#" class="top-back-btn" onclick="closeShop()">← بازگشت به صفحه اصلی</a>
     
     <!-- 🟢 دکمه‌های اسکرول همراه با محتوا (نه ثابت) 🟢 -->
+    <!-- با قرار دادن position: absolute و left: 10px، این کانتینر در بالای محتوا قرار می‌گیره -->
     <div class="scroll-nav-container">
       <button class="scroll-btn" onclick="scrollToFirst()">⬆</button>
       <button class="scroll-btn" onclick="scrollToLast()">⬇</button>
@@ -415,7 +418,12 @@
       toastTimer = setTimeout(() => { toast.classList.remove('show'); }, 9000); 
     }
 
-    function openShop() { closeSidebar(); document.getElementById('shopModal').classList.add('active'); }
+    function openShop() { 
+        closeSidebar(); 
+        document.getElementById('shopModal').classList.add('active'); 
+        // این خط باعث میشه موقع باز کردن فروشگاه، اسکرول برگرده به بالا
+        document.getElementById('shopModal').scrollTop = 0;
+    }
     function closeShop() { document.getElementById('shopModal').classList.remove('active'); }
 
     function openSupport() { closeSidebar(); document.getElementById('supportModal').classList.add('active'); }
@@ -500,4 +508,4 @@
     }
   </script>
 </body>
-       </html>
+ </html>
